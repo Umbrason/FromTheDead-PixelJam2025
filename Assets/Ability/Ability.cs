@@ -3,7 +3,7 @@ using UnityEngine;
 public class Ability : MonoBehaviour
 {
 
-    public virtual float CooldownDuration { get; }
+    public virtual float CooldownDuration { get; } = .05f;
     public float CurrentCooldown => Mathf.Max(0, (m_cooldownStart + CooldownDuration * AvailableCharges - Time.time) % CooldownDuration);
     private float m_cooldownStart;
     public bool IsOffCooldown => AvailableCharges > 0;
@@ -13,7 +13,7 @@ public class Ability : MonoBehaviour
     public int AvailableCharges => System.Math.Min(Charges, (int)System.Math.Floor((Time.time - m_cooldownStart) / CooldownDuration));
     public virtual int Charges => 2;
 
-    public virtual bool CanUse { get; }
+    public virtual bool CanUse => true;
     private float m_useStartTime = float.PositiveInfinity;
     public float CurrentUseTime => IsUsing ? Time.time - m_useStartTime : 0;
     public bool IsUsing => m_inUse;
