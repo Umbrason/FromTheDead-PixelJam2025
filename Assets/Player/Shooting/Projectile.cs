@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
     [field: SerializeField] protected int BaseDamage { get; private set; } = 1;
     [field: SerializeField] protected float LaunchSpeed { get; private set; } = 5;
     protected Vector2 LaunchDirection { get; private set; }
+
+    private Vector2 SpeedAtLaunch;
     private float launchStartTime;
     protected float FlightTime => enabled ? Time.time - launchStartTime : 0;
 
@@ -63,11 +65,12 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        VelocityController.AddOverwriteMovement(new(ModifiedDirection._x0y().normalized * ModifiedSpeed), 0f, 0);
+        VelocityController.AddOverwriteMovement(new(ModifiedDirection._x0y().normalized * ModifiedSpeed + SpeedAtLaunch._x0y()), 0f, 0);
+        if (FlightTime > 5) Drop();
     }
 
     private HealthEvent damageEvent;
-    public void Shoot(Vector2 direction)
+    public void Shoot(Vector2 direction, Vector2 speedAtLaunch)
     {
         transform.SetLayerRecursive(LayerMask.NameToLayer("PlayerProjectile"));
         transform.SetParent(null);
@@ -76,6 +79,8 @@ public class Projectile : MonoBehaviour
         Rigidbody.linearVelocity = default;
         launchStartTime = Time.time;
         LaunchDirection = direction;
+        var ignoreLaunchSpeed = Mathf.Max(0, Vector2.Dot(-direction.normalized, speedAtLaunch)) * -direction.normalized;
+        SpeedAtLaunch = speedAtLaunch - ignoreLaunchSpeed;
         damageEvent = HealthEvent.Damage((uint)BaseDamage, source: gameObject);
 
     }

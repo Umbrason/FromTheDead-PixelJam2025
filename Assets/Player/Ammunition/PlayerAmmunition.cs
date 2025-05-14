@@ -10,7 +10,7 @@ public class PlayerAmmunition : MonoBehaviour
     {
         var idx = m_Projectiles.IndexOf(p);
         appendagePositions.RemoveAt(idx);
-        appendageForces.RemoveAt(idx);
+        appendageVelocities.RemoveAt(idx);
         m_Projectiles.Remove(p);
         HealthPool.RegisterHealthEvent(HealthEvent.Damage(1));
         ShootingQueue.Remove(p);
@@ -19,6 +19,7 @@ public class PlayerAmmunition : MonoBehaviour
     private readonly List<Projectile> m_Projectiles = new();
     public IReadOnlyList<Projectile> Projectiles => m_Projectiles;
     public IReadOnlyList<Vector2> AppendagePositions => appendagePositions;
+    public IReadOnlyList<Vector2> AppendageVelocities => appendageVelocities;
 
     Cached<Rigidbody> cached_Rigidbody;
     Rigidbody Rigidbody => cached_Rigidbody[this];
@@ -49,10 +50,11 @@ public class PlayerAmmunition : MonoBehaviour
         projectile.transform.SetParent(transform, true);
         ShootingQueue.Add(projectile);
         appendagePositions.Add(projectile.transform.localPosition._xz());
+        appendageVelocities.Add(default);
         HealthPool.RegisterHealthEvent(HealthEvent.Heal(1));
     }
 
-    private List<Vector2> appendageForces = new();
+    private List<Vector2> appendageVelocities = new();
     private List<Vector2> appendagePositions = new();
 
     [SerializeField] private float noiseScale = 1;
@@ -61,14 +63,19 @@ public class PlayerAmmunition : MonoBehaviour
     [SerializeField] private float boidStrength = 1;
     [SerializeField] private float coreAttractionStrength = 1;
     [SerializeField] private float drag = .95f;
+    [SerializeField] private float sleepThreshold = .01f;
+    [SerializeField] private float squishForce = 20f;
+    [SerializeField] private float accelerationForce = 20f;
     private void FixedUpdate()
     {
-        while (appendageForces.Count < appendagePositions.Count) appendageForces.Add(default);
+        while (appendageVelocities.Count < appendagePositions.Count) appendageVelocities.Add(default);
         for (int i = 0; i < appendagePositions.Count; i++)
         {
             var pos = appendagePositions[i];
-            appendageForces[i] += appendagePositions[i] * (1 - appendagePositions[i].sqrMagnitude) * Time.fixedDeltaTime * coreAttractionStrength;
-            appendageForces[i] += Vector2.ClampMagnitude(Rigidbody.linearVelocity._xz(), 20) * Time.fixedDeltaTime * -2;
+            appendageVelocities[i] += appendagePositions[i] * (1 - appendagePositions[i].sqrMagnitude) * Time.fixedDeltaTime * coreAttractionStrength;
+            appendageVelocities[i] += -Rigidbody.linearVelocity._xz() * Time.fixedDeltaTime * accelerationForce;
+            var perpendicular = Vector2.Perpendicular(Rigidbody.linearVelocity._xz());
+            appendageVelocities[i] -= Vector2.Dot(appendagePositions[i], perpendicular.normalized) * perpendicular.normalized * squishForce * Time.fixedDeltaTime;
             for (int j = 0; j < appendagePositions.Count; j++)
             {
                 var delta = j == i ? pos : pos - appendagePositions[j];
@@ -77,21 +84,21 @@ public class PlayerAmmunition : MonoBehaviour
                     sqrMag = .1f;
                 delta = delta.normalized / sqrMag;
                 if (delta.sqrMagnitude < 0.1f) delta = default;
-                appendageForces[i] += delta * Time.fixedDeltaTime * boidStrength;
+                appendageVelocities[i] += delta * Time.fixedDeltaTime * boidStrength;
             }
-            appendageForces[i] += Vector2.up * Mathf.Max(0, -appendagePositions[i].y * floorStrength) * Time.fixedDeltaTime;
+            appendageVelocities[i] += Vector2.up * Mathf.Max(0, -appendagePositions[i].y * floorStrength) * Time.fixedDeltaTime;
             var perlinSamplePos = appendagePositions[i] / noiseScale / 1.43265f + new Vector2(-523.426346f, 735.2341f);
             var alpha = Mathf.PerlinNoise(perlinSamplePos.x - 267.923f, perlinSamplePos.y + 126.623f) * Mathf.PI * 2f;
             var intensity = Mathf.PerlinNoise(perlinSamplePos.x, perlinSamplePos.y);
             intensity *= intensity;
             var randomForce = new Vector2(Mathf.Cos(alpha), Mathf.Sin(alpha)) * intensity * noiseStrength;
             Debug.DrawLine(appendagePositions[i]._x0y() + transform.position, appendagePositions[i]._x0y() + transform.position + randomForce._x0y(), Color.red, 0f);
-            appendageForces[i] += randomForce * Time.fixedDeltaTime;
-            appendageForces[i] *= drag;
+            appendageVelocities[i] += randomForce * Time.fixedDeltaTime;
+            appendageVelocities[i] *= drag;
         }
         for (int i = 0; i < appendagePositions.Count; i++)
         {
-            if (appendageForces[i].sqrMagnitude > .05f) appendagePositions[i] += appendageForces[i] * Time.fixedDeltaTime * 3f;
+            if (appendageVelocities[i].sqrMagnitude > sleepThreshold * sleepThreshold) appendagePositions[i] += appendageVelocities[i] * Time.fixedDeltaTime * 3f;
             m_Projectiles[i].transform.localPosition = appendagePositions[i]._x0y();
         }
     }

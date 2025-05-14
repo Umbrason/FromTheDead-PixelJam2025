@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Duration>k__BackingField: 0.1
-  <Range>k__BackingField: 10
+  <Range>k__BackingField: 4
   DashCooldown: 0.5
 --- !u!114 &9167262936957681886
 MonoBehaviour:
@@ -218,6 +218,9 @@ MonoBehaviour:
   boidStrength: 20
   coreAttractionStrength: 4
   drag: 0.7
+  sleepThreshold: 0.01
+  squishForce: 20
+  accelerationForce: 20
 --- !u!1 &7196064271181385922
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +234,7 @@ GameObject:
   - component: {fileID: 2537679603520405581}
   - component: {fileID: 7456728828723118208}
   m_Layer: 6
-  m_Name: Visual
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
