@@ -18,7 +18,7 @@ public class PlayerAmmunition : MonoBehaviour
     }
     private readonly List<Projectile> m_Projectiles = new();
     public IReadOnlyList<Projectile> Projectiles => m_Projectiles;
-    public IReadOnlyList<Vector2> AppendagePositions => appendagePositions;
+    public IReadOnlyList<Vector2> AppendagePositions => Projectiles.Select(p => transform.InverseTransformPoint(p.Rigidbody.position)._xz()).ToList();
     public IReadOnlyList<Vector2> AppendageVelocities => appendageVelocities;
 
     Cached<Rigidbody> cached_Rigidbody;
@@ -36,22 +36,31 @@ public class PlayerAmmunition : MonoBehaviour
         if (HealthPool) HealthPool.OnModifiedWithSource -= HealthChanged;
     }
 
+
+    void OnCollisionEnter(Collision other)
+    {
+        var projectile = other.collider.GetComponent<Projectile>();
+        if(!projectile) return;
+        TryCollect(projectile);
+    }
     void OnTriggerEnter(Collider other)
     {
         var projectile = other.GetComponent<Projectile>();
-        if (!(projectile?.enabled ?? true)) Collect(projectile);
+        if(!projectile) return;
+        TryCollect(projectile);
     }
 
-    public void Collect(Projectile projectile)
+    public void TryCollect(Projectile projectile)
     {
+        if (projectile.CurrentState != Projectile.State.Dropped) return;
+        if (HealthPool.Current == HealthPool.Size) return; //full
         if (m_Projectiles.Contains(projectile)) return;
-        projectile.transform.SetLayerRecursive(LayerMask.NameToLayer("Player"));
         m_Projectiles.Add(projectile);
-        projectile.transform.SetParent(transform, true);
         ShootingQueue.Add(projectile);
-        appendagePositions.Add(projectile.transform.localPosition._xz());
+        appendagePositions.Add(transform.InverseTransformPoint(projectile.transform.position)._xz());
         appendageVelocities.Add(default);
-        HealthPool.RegisterHealthEvent(HealthEvent.Heal(1));
+        projectile.OnCollect(this);
+        HealthPool.Current += 1;
     }
 
     private List<Vector2> appendageVelocities = new();
@@ -80,6 +89,7 @@ public class PlayerAmmunition : MonoBehaviour
             {
                 var delta = j == i ? pos : pos - appendagePositions[j];
                 var sqrMag = delta.sqrMagnitude;
+                if (sqrMag == 0) continue;
                 if (sqrMag <= 0.1f)
                     sqrMag = .1f;
                 delta = delta.normalized / sqrMag;
@@ -95,11 +105,17 @@ public class PlayerAmmunition : MonoBehaviour
             Debug.DrawLine(appendagePositions[i]._x0y() + transform.position, appendagePositions[i]._x0y() + transform.position + randomForce._x0y(), Color.red, 0f);
             appendageVelocities[i] += randomForce * Time.fixedDeltaTime;
             appendageVelocities[i] *= drag;
+            if (appendageVelocities[i].magnitude == float.NaN)
+                Debug.Log("NaN");
         }
         for (int i = 0; i < appendagePositions.Count; i++)
         {
             if (appendageVelocities[i].sqrMagnitude > sleepThreshold * sleepThreshold) appendagePositions[i] += appendageVelocities[i] * Time.fixedDeltaTime * 3f;
-            m_Projectiles[i].transform.localPosition = appendagePositions[i]._x0y();
+            var targetPos = transform.TransformPoint(appendagePositions[i]._x0y());
+            var delta = targetPos - m_Projectiles[i].transform.position;
+            m_Projectiles[i].Collider.enabled = delta.sqrMagnitude <= 3 * 3;
+            m_Projectiles[i].Rigidbody.MovePosition(targetPos);
+            //AddForce(delta / Time.fixedDeltaTime - m_Projectiles[i].Rigidbody.linearVelocity, ForceMode.VelocityChange);
         }
     }
 

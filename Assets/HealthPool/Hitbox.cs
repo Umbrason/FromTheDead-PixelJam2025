@@ -10,6 +10,7 @@ public class Hitbox : MonoBehaviour
     public event Action<HealthEvent> OnDamageEventRegistered;
     public void RegisterDamageEvent(HealthEvent damageEvent)
     {
+        if (!HealthPool) return;
         HealthPool.RegisterHealthEvent(damageEvent, (IsCritical && damageEvent.CanCrit ? 2 : 1) * (enabled ? 1 : 0));
         OnDamageEventRegistered?.Invoke(damageEvent);
     }

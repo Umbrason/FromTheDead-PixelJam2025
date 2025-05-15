@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.umbrason.umbrasonsutils": "file:/home/umbrason/Unity/Packages/UmbrasonsUtils",
+    "com.umbrason.unity-kanban": "file:/home/umbrason/Unity/Packages/Kanban",
     "com.umbrason.velocitycontroller": "file:/home/umbrason/Unity/Packages/VelocityController",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.22",

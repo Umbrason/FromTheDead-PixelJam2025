@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95282333184af5ffbcceb9158426bf6, type: 3}
+  m_Name: IdleInterrupt
+  m_EditorClassIdentifier: 
+  BaseAnimation: {fileID: 11400000, guid: b80572ac02a39b591b6a1976bf32f476, type: 2}
+  InterruptAnimations:
+  - {fileID: 11400000, guid: 087631037e65f229388ed030540a187b, type: 2}
+  minGap: 5
+  maxGap: 12

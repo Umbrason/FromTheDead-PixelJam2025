@@ -16,6 +16,7 @@ Shader "Unlit/PlayerBodyShader"
         _NoiseDistortion("Noise Distortion", Float) = .15
         _NoiseDistortionFrequency("Noise Frequency", Float) = .15
         _Flatness("Flatness", Float) = .15
+        _blobSize("Blob Size", Float) = 1
         _k("Smoothing", Float) = .45
     }
     SubShader
@@ -58,6 +59,7 @@ Shader "Unlit/PlayerBodyShader"
             float _NoiseDistortion;
             float _SizeRandomness;
             float _Flatness;
+            float _blobSize;
 
 
             float _ShadingThreshold;
@@ -114,10 +116,11 @@ Shader "Unlit/PlayerBodyShader"
                     float2 velPerpendicular = float2(vel.y, -vel.x);
                     float velMag = length(vel);
                     float2 delta = sdfSamplePos - pos;
+                    delta /= _blobSize;
                     delta *= 1 + sin(_Time.y + rand(i + 784.42) * 6.828) * .15;
                     /* delta /= 1 + saturate(-delta.y) * .2; */
                     delta *= ((rand(i) - .5) * _SizeRandomness) + 1;
-                    
+
                     if(velMag > .1) delta *= float2(1,1) + abs(velPerpendicular / velMag * saturate(velMag / 10.0) * .5) - abs(vel / velMag * saturate(velMag / 10.0) * .5);
                     float sqrDist = dot(delta, delta);
                     float dist = sqrt(sqrDist);

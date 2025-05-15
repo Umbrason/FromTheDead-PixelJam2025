@@ -21,7 +21,7 @@ public class UpscaledCamera : MonoBehaviour
         {
             var widthDriven = new Vector2(TargetResolution.x, TargetResolution.x * ScreenBufferSize.y / (float)ScreenBufferSize.x);
             var heightDriven = new Vector2(TargetResolution.y * ScreenBufferSize.x / (float)ScreenBufferSize.y, TargetResolution.y);
-            return Vector2Int.RoundToInt(Vector2.Lerp(widthDriven, heightDriven, 1 - MatchWidth));
+            return Vector2Int.RoundToInt(Vector2.Lerp(widthDriven, heightDriven, 1 - MatchWidth)) / 2 * 2;
         }
         public ResolutionSettings(Vector2Int TargetResolution, float MatchWidth = 0.5f)
         {

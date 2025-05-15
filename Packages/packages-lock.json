@@ -8,6 +8,12 @@
         "com.unity.inputsystem": "1.0.0"
       }
     },
+    "com.umbrason.unity-kanban": {
+      "version": "file:/home/umbrason/Unity/Packages/Kanban",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.umbrason.velocitycontroller": {
       "version": "file:/home/umbrason/Unity/Packages/VelocityController",
       "depth": 0,
