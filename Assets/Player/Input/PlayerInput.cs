@@ -110,6 +110,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""AimAbsolute"",
+                    ""type"": ""Value"",
+                    ""id"": ""062ce78f-51d5-4a1e-8151-1211b677a51c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""465a5efe-88ec-435b-9396-ceb85cb2c0b9"",
@@ -141,9 +150,75 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""9a45311a-f23d-48ad-bbc6-1678e51c368e"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""90eafc5d-5327-4226-8191-b9501ca434aa"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""9a3fefb5-d502-41e9-8a0d-88a927ffac13"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""a0431dd3-9bbf-4712-b2df-657bebe26605"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1aa74f3f-c2fe-449b-bd90-1ac2d2245cdf"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""a5d6f48b-dc70-464f-8387-be82cf995725"",
                     ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""729d8262-869a-4ca2-9c36-8524e02e7c79"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -172,6 +247,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34f19f91-eae4-4da0-a5b6-30fd751bfacb"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af048f9f-8ac0-4faa-8308-2d1889aff6bb"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1dfad81f-f93a-4a70-8187-28b23acf600b"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AimAbsolute"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,6 +290,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_GameplayActions = asset.FindActionMap("Gameplay Actions", throwIfNotFound: true);
         m_GameplayActions_Move = m_GameplayActions.FindAction("Move", throwIfNotFound: true);
         m_GameplayActions_Aim = m_GameplayActions.FindAction("Aim", throwIfNotFound: true);
+        m_GameplayActions_AimAbsolute = m_GameplayActions.FindAction("AimAbsolute", throwIfNotFound: true);
         m_GameplayActions_Shoot = m_GameplayActions.FindAction("Shoot", throwIfNotFound: true);
         m_GameplayActions_Dash = m_GameplayActions.FindAction("Dash", throwIfNotFound: true);
     }
@@ -266,6 +375,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private List<IGameplayActionsActions> m_GameplayActionsActionsCallbackInterfaces = new List<IGameplayActionsActions>();
     private readonly InputAction m_GameplayActions_Move;
     private readonly InputAction m_GameplayActions_Aim;
+    private readonly InputAction m_GameplayActions_AimAbsolute;
     private readonly InputAction m_GameplayActions_Shoot;
     private readonly InputAction m_GameplayActions_Dash;
     /// <summary>
@@ -287,6 +397,10 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GameplayActions/Aim".
         /// </summary>
         public InputAction @Aim => m_Wrapper.m_GameplayActions_Aim;
+        /// <summary>
+        /// Provides access to the underlying input action "GameplayActions/AimAbsolute".
+        /// </summary>
+        public InputAction @AimAbsolute => m_Wrapper.m_GameplayActions_AimAbsolute;
         /// <summary>
         /// Provides access to the underlying input action "GameplayActions/Shoot".
         /// </summary>
@@ -327,6 +441,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @AimAbsolute.started += instance.OnAimAbsolute;
+            @AimAbsolute.performed += instance.OnAimAbsolute;
+            @AimAbsolute.canceled += instance.OnAimAbsolute;
             @Shoot.started += instance.OnShoot;
             @Shoot.performed += instance.OnShoot;
             @Shoot.canceled += instance.OnShoot;
@@ -350,6 +467,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @AimAbsolute.started -= instance.OnAimAbsolute;
+            @AimAbsolute.performed -= instance.OnAimAbsolute;
+            @AimAbsolute.canceled -= instance.OnAimAbsolute;
             @Shoot.started -= instance.OnShoot;
             @Shoot.performed -= instance.OnShoot;
             @Shoot.canceled -= instance.OnShoot;
@@ -410,6 +530,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AimAbsolute" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAimAbsolute(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Shoot" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

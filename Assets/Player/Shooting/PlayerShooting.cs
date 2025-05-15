@@ -14,6 +14,7 @@ public class PlayerShooting : Ability
     public override void OnPress()
     {
         var projectile = PlayerAmmunition.RemoveProjectile(PlayerAmmunition.Next);
+        projectile.transform.position = transform.position;
         projectile.Shoot(Direction, Rigidbody.linearVelocity._xz());
         CompleteUse();
     }

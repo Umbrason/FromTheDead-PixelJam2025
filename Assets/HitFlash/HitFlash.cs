@@ -17,6 +17,12 @@ public class HitFlash : MonoBehaviour
         if (HealthPool) HealthPool.OnModified -= OnHealthModified;
     }
 
+    //TEST
+    void Update()
+    {
+        HitFlashRenderFeature.Flash(gameObject);
+    }
+
     void OnHealthModified(int change)
     {
         if (change < 0) HitFlashRenderFeature.Flash(gameObject);

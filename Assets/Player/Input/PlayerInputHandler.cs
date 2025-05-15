@@ -40,4 +40,9 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInput.IGameplayActionsAct
         input.GameplayActions.SetCallbacks(this);
         input.GameplayActions.Enable();
     }
+
+    public void OnAimAbsolute(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        /*  */
+    }
 }
