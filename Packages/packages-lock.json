@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.umbrason.dynamicinteractableshader": {
+      "version": "file:/home/umbrason/Unity/Packages/DynamicInteractableShader",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.umbrason.umbrasonsutils": {
       "version": "file:/home/umbrason/Unity/Packages/UmbrasonsUtils",
       "depth": 0,

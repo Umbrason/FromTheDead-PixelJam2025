@@ -129,10 +129,7 @@ public class HitFlashRenderFeature : ScriptableRendererFeature
         public class HitflashPassData
         {
             public HitflashInfo hitflashInfo;
-            public HitflashPassData()
-            {
-                hitflashInfo = null;
-            }
+            public TextureHandle hitFlashMaskTextureHandle;
         }
 
         public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
@@ -159,38 +156,35 @@ public class HitFlashRenderFeature : ScriptableRendererFeature
             while (activeHitFlashes.Count > 0 && activeHitFlashes[0].startTime < minValidStartTime)
                 activeHitFlashes.RemoveAt(0);
             if (hitflashBlitMaterial == null) return;
-            for (int i = 0; i < activeHitFlashes.Count; i++)
+            var activeFlashes = activeHitFlashes;
+            for (int i = 0; i < activeFlashes.Count; i++)
             {
-                var hitflash = activeHitFlashes[i];
+                var hitflash = activeFlashes[i];
                 using (var renderPass = renderGraph.AddRasterRenderPass<HitflashPassData>("Hitflash-Render", out var data))
                 {
                     data.hitflashInfo = hitflash;
+                    data.hitFlashMaskTextureHandle = hitFlashMaskTextureHandle;
                     renderPass.SetRenderAttachment(hitFlashMaskTextureHandle, 0);
                     renderPass.SetRenderAttachmentDepth(srcCamDepthHandle, 0);
                     renderPass.SetRenderFunc<HitflashPassData>(ExecuteHitflashRenderPass);
                 }
-
-                var blitHitflashPassParams = new RenderGraphUtils.BlitMaterialParameters(hitFlashMaskTextureHandle, srcCamColorHandle, hitflashBlitMaterial, 0);
-                using (var blitPass = renderGraph.AddRasterRenderPass<HitflashPassData>("Hitflas-Blit", out var data))
+                var blitPropertyBlock = new MaterialPropertyBlock();
+                blitPropertyBlock.SetFloat("t", (hitflash.startTime - Time.time) / settings.duration);
+                RenderGraphUtils.BlitMaterialParameters parameters = new(hitFlashMaskTextureHandle, srcCamColorHandle, hitflashBlitMaterial, 0)
                 {
-                    data.hitflashInfo = hitflash;
-                    blitPass.SetRenderAttachment(hitFlashMaskTextureHandle, 0);
-                    blitPass.SetRenderAttachmentDepth(srcCamDepthHandle, 0);
-                    blitPass.SetRenderFunc<HitflashPassData>(ExecuteHitflashBlitPass);
-                }
+                    sourceTexturePropertyID = Shader.PropertyToID("_MainTex"),
+                    propertyBlock = blitPropertyBlock,
+                    geometry = RenderGraphUtils.FullScreenGeometryType.ProceduralTriangle
+                };
+                renderGraph.AddBlitPass(parameters);
             }
-        }
-
-        private void ExecuteHitflashBlitPass(HitflashPassData data, RasterGraphContext context)
-        {
-            hitflashBlitMaterial.SetFloat("t", (data.hitflashInfo.startTime - Time.time) / settings.duration);
-            //TODO: continue here
         }
 
         private void ExecuteHitflashRenderPass(HitflashPassData data, RasterGraphContext context)
         {
             //render active entries
             var cmd = context.cmd;
+            cmd.ClearRenderTarget(RTClearFlags.Color, new Color(0, 0, 0, 0), 1f, 0);
             for (int r = 0; r < data.hitflashInfo.renderTargets.Length; r++)
             {
                 var renderTarget = data.hitflashInfo.renderTargets[r];
@@ -201,7 +195,6 @@ public class HitFlashRenderFeature : ScriptableRendererFeature
                 for (int m = 0; m < mesh.subMeshCount; m++)
                 {
                     var shaderPass = materials[m].FindPass("ForwardLit");
-                    cmd.ClearRenderTarget(RTClearFlags.Color, new Color(0, 0, 0, 0), 1f, 0);
                     cmd.DrawRenderer(renderTarget.Renderer, materials[m], m, shaderPass);
                 }
             }

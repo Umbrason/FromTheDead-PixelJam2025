@@ -97,6 +97,7 @@ public class Projectile : MonoBehaviour
             if (owner != null) owner.gameObject.SendMessageUpwards(nameof(OnTriggerEnter), other);
             return;
         }
+        if (other.isTrigger) return; //only meant for piercing projectiles hitting regular hitboxes
         var hitbox = other.GetComponentInParent<Hitbox>();
         var generatedPos = other.ClosestPoint(transform.position);
         var generatedNormal = (transform.position - generatedPos).normalized;
@@ -116,11 +117,13 @@ public class Projectile : MonoBehaviour
         StopCoroutine(nameof(DropAnimation));
         DropImpactVFX.gameObject.SetActive(false);
         Visual.transform.localPosition = default;
+        Collider.isTrigger = false; 
     }
 
     protected void Drop()
     {
         if (CurrentState != State.Shooting) return;
+        Collider.isTrigger = true;
         transform.SetLayerRecursive(0);
         CurrentState = State.Dropped;
         launchStartTime = float.PositiveInfinity;
@@ -154,8 +157,7 @@ public class Projectile : MonoBehaviour
         Rigidbody.linearVelocity = default;
         launchStartTime = Time.time;
         LaunchDirection = direction;
-        var ignoreLaunchSpeed = Mathf.Max(0, Vector2.Dot(-direction.normalized, speedAtLaunch)) * -direction.normalized;
-        SpeedAtLaunch = speedAtLaunch - ignoreLaunchSpeed;
+        SpeedAtLaunch = default;
         damageEvent = HealthEvent.Damage((uint)BaseDamage, source: gameObject);
     }
 }

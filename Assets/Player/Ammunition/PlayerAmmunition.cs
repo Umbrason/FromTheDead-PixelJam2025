@@ -19,7 +19,7 @@ public class PlayerAmmunition : MonoBehaviour
     private readonly List<Projectile> m_Projectiles = new();
     public IReadOnlyList<Projectile> Projectiles => m_Projectiles;
     public IReadOnlyList<Vector2> AppendagePositions => Projectiles.Select(p => transform.InverseTransformPoint(p.Rigidbody.position)._xz()).ToList();
-    public IReadOnlyList<Vector2> AppendageVelocities => appendageVelocities;
+    public IReadOnlyList<Vector2> AppendageVelocities => Projectiles.Select(p => transform.InverseTransformDirection(p.Rigidbody.linearVelocity)._xz()).ToList();/* appendageVelocities; */
 
     Cached<Rigidbody> cached_Rigidbody;
     Rigidbody Rigidbody => cached_Rigidbody[this];
@@ -40,13 +40,13 @@ public class PlayerAmmunition : MonoBehaviour
     void OnCollisionEnter(Collision other)
     {
         var projectile = other.collider.GetComponent<Projectile>();
-        if(!projectile) return;
+        if (!projectile) return;
         TryCollect(projectile);
     }
     void OnTriggerEnter(Collider other)
     {
         var projectile = other.GetComponent<Projectile>();
-        if(!projectile) return;
+        if (!projectile) return;
         TryCollect(projectile);
     }
 
@@ -105,8 +105,6 @@ public class PlayerAmmunition : MonoBehaviour
             Debug.DrawLine(appendagePositions[i]._x0y() + transform.position, appendagePositions[i]._x0y() + transform.position + randomForce._x0y(), Color.red, 0f);
             appendageVelocities[i] += randomForce * Time.fixedDeltaTime;
             appendageVelocities[i] *= drag;
-            if (appendageVelocities[i].magnitude == float.NaN)
-                Debug.Log("NaN");
         }
         for (int i = 0; i < appendagePositions.Count; i++)
         {
@@ -114,8 +112,9 @@ public class PlayerAmmunition : MonoBehaviour
             var targetPos = transform.TransformPoint(appendagePositions[i]._x0y());
             var delta = targetPos - m_Projectiles[i].transform.position;
             m_Projectiles[i].Collider.enabled = delta.sqrMagnitude <= 3 * 3;
-            m_Projectiles[i].Rigidbody.MovePosition(targetPos);
-            //AddForce(delta / Time.fixedDeltaTime - m_Projectiles[i].Rigidbody.linearVelocity, ForceMode.VelocityChange);
+            var force = delta / Time.fixedDeltaTime - m_Projectiles[i].Rigidbody.linearVelocity;
+            if (float.IsNaN(force.x) || float.IsNaN(force.y) || float.IsNaN(force.z)) continue;
+            m_Projectiles[i].Rigidbody.AddForce(force, ForceMode.VelocityChange);
         }
     }
 

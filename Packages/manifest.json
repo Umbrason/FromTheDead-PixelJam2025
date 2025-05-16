@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.umbrason.dynamicinteractableshader": "file:/home/umbrason/Unity/Packages/DynamicInteractableShader",
     "com.umbrason.umbrasonsutils": "file:/home/umbrason/Unity/Packages/UmbrasonsUtils",
     "com.umbrason.unity-kanban": "file:/home/umbrason/Unity/Packages/Kanban",
     "com.umbrason.velocitycontroller": "file:/home/umbrason/Unity/Packages/VelocityController",

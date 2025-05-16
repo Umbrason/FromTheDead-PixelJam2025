@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HitFlash : MonoBehaviour
@@ -15,12 +13,6 @@ public class HitFlash : MonoBehaviour
     void OnDestroy()
     {
         if (HealthPool) HealthPool.OnModified -= OnHealthModified;
-    }
-
-    //TEST
-    void Update()
-    {
-        HitFlashRenderFeature.Flash(gameObject);
     }
 
     void OnHealthModified(int change)

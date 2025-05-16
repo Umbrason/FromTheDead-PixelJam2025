@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer)), ExecuteInEditMode]
+[RequireComponent(typeof(SpriteRenderer)), ExecuteAlways]
 public class SpriteAnimator : MonoBehaviour
 {
     [SerializeField] private ScriptableSpriteAnimation m_Current;
