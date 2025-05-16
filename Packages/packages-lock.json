@@ -1,30 +1,34 @@
 {
   "dependencies": {
     "com.umbrason.dynamicinteractableshader": {
-      "version": "file:/home/umbrason/Unity/Packages/DynamicInteractableShader",
+      "version": "https://github.com/Umbrason/DynamicInteractableShader.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "3927c424d12b283a83cd873aebee1e8944bb6dd3"
     },
     "com.umbrason.umbrasonsutils": {
-      "version": "file:/home/umbrason/Unity/Packages/UmbrasonsUtils",
+      "version": "https://github.com/Umbrason/UmbrasonsUtils.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.inputsystem": "1.0.0"
-      }
+      },
+      "hash": "6bdd62159a7d9625d3fcae5381e91cb1737230c7"
     },
     "com.umbrason.unity-kanban": {
-      "version": "file:/home/umbrason/Unity/Packages/Kanban",
+      "version": "https://github.com/Umbrason/Kanban.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "a8efde700f828d89d4fb23d33b1e5674570bd12d"
     },
     "com.umbrason.velocitycontroller": {
-      "version": "file:/home/umbrason/Unity/Packages/VelocityController",
+      "version": "https://github.com/Umbrason/VelocityController.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "24f9838560b78931565292d774127bebe898fb40"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

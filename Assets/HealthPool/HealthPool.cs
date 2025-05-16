@@ -14,6 +14,7 @@ public class HealthPool : MonoBehaviour
             var prevHealth = m_Current;
             this.m_Current = Mathf.Clamp(value, 0, Size);
             OnModified?.Invoke(m_Current - prevHealth);
+            OnModifiedWithSource?.Invoke(m_Current - prevHealth, null);
             if (Current == 0) OnDepleted?.Invoke();
         }
     }

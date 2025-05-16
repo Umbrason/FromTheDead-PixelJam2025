@@ -110,14 +110,15 @@ public class Projectile : MonoBehaviour
         if (CurrentState != State.Dropped) return;
         CurrentState = State.Collected;
         owner = Collector;
+        transform.SetLayerRecursive(LayerMask.NameToLayer("Player"));
+        transform.SetParent(owner.transform, true);
         Shadow.SetActive(false);
         DroppedIndicator.SetActive(false);
-        transform.SetLayerRecursive(LayerMask.NameToLayer("Player"));
         Rigidbody.isKinematic = false;
         StopCoroutine(nameof(DropAnimation));
         DropImpactVFX.gameObject.SetActive(false);
         Visual.transform.localPosition = default;
-        Collider.isTrigger = false; 
+        Collider.isTrigger = false;
     }
 
     protected void Drop()
@@ -148,8 +149,8 @@ public class Projectile : MonoBehaviour
     {
         if (CurrentState != State.Collected) return;
         Visual.transform.localPosition = Vector3.forward * currentFlightHeight;
-        transform.SetLayerRecursive(LayerMask.NameToLayer("PlayerProjectile"));
         transform.SetParent(null);
+        transform.SetLayerRecursive(LayerMask.NameToLayer("PlayerProjectile"));
         Shadow.SetActive(true);
         owner = null;
         CurrentState = State.Shooting;

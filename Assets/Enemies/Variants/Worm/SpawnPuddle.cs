@@ -4,7 +4,7 @@ public class SpawnPuddle : MonoBehaviour
 {
     Vector2 lastPosition;
     [Tooltip("How far the puddles should be apart from each other")]
-    [SerializeField] float minDistance = .5f;
+    [SerializeField] float minDistance = .75f;
     [SerializeField] private GameObject PuddlePrefab;
 
     void FixedUpdate()

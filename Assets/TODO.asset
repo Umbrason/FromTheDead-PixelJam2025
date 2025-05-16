@@ -23,7 +23,37 @@ MonoBehaviour:
     - title: Enemy Behavior
       content: 
       AssetRefs: []
+    - title: Worm
+      content: 
+      AssetRefs: []
+    - title: Brain
+      content: 
+      AssetRefs: []
+    - title: Eye Fly
+      content: 
+      AssetRefs: []
+    - title: Hand Spider
+      content: 
+      AssetRefs: []
+    - title: 
+      content: 
+      AssetRefs: []
     - title: Projectile Variants
+      content: 
+      AssetRefs: []
+    - title: Eye
+      content: 
+      AssetRefs: []
+    - title: Bonemerang
+      content: 
+      AssetRefs: []
+    - title: Brain
+      content: 
+      AssetRefs: []
+    - title: Intestines
+      content: 
+      AssetRefs: []
+    - title: Heart
       content: 
       AssetRefs: []
   - title: Done

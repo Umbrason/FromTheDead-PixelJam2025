@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "com.umbrason.dynamicinteractableshader": "file:/home/umbrason/Unity/Packages/DynamicInteractableShader",
-    "com.umbrason.umbrasonsutils": "file:/home/umbrason/Unity/Packages/UmbrasonsUtils",
-    "com.umbrason.unity-kanban": "file:/home/umbrason/Unity/Packages/Kanban",
-    "com.umbrason.velocitycontroller": "file:/home/umbrason/Unity/Packages/VelocityController",
+    "com.umbrason.dynamicinteractableshader": "https://github.com/Umbrason/DynamicInteractableShader.git",
+    "com.umbrason.umbrasonsutils": "https://github.com/Umbrason/UmbrasonsUtils.git",
+    "com.umbrason.unity-kanban": "https://github.com/Umbrason/Kanban.git",
+    "com.umbrason.velocitycontroller": "https://github.com/Umbrason/VelocityController.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.inputsystem": "1.14.0",

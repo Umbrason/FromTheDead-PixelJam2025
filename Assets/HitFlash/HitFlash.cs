@@ -7,16 +7,16 @@ public class HitFlash : MonoBehaviour
 
     void Awake()
     {
-        HealthPool.OnModified += OnHealthModified;
+        HealthPool.OnModifiedWithSource += OnHealthModified;
     }
 
     void OnDestroy()
     {
-        if (HealthPool) HealthPool.OnModified -= OnHealthModified;
+        if (HealthPool) HealthPool.OnModifiedWithSource -= OnHealthModified;
     }
 
-    void OnHealthModified(int change)
+    void OnHealthModified(int change, HealthEvent healthEvent)
     {
-        if (change < 0) HitFlashRenderFeature.Flash(gameObject);
+        if (healthEvent != null && healthEvent.Amount < 0 && healthEvent.Source != gameObject) HitFlashRenderFeature.Flash(gameObject);
     }
 }

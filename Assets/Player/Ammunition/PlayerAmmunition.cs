@@ -12,9 +12,14 @@ public class PlayerAmmunition : MonoBehaviour
         appendagePositions.RemoveAt(idx);
         appendageVelocities.RemoveAt(idx);
         m_Projectiles.Remove(p);
-        HealthPool.RegisterHealthEvent(HealthEvent.Damage(1));
         ShootingQueue.Remove(p);
+        HealthPool.Current = m_Projectiles.Count + 1;
         return p;
+    }
+    public void DestroyProjectile(Projectile p)
+    {
+        RemoveProjectile(p);
+        Destroy(p.gameObject);
     }
     private readonly List<Projectile> m_Projectiles = new();
     public IReadOnlyList<Projectile> Projectiles => m_Projectiles;
@@ -60,7 +65,7 @@ public class PlayerAmmunition : MonoBehaviour
         appendagePositions.Add(transform.InverseTransformPoint(projectile.transform.position)._xz());
         appendageVelocities.Add(default);
         projectile.OnCollect(this);
-        HealthPool.Current += 1;
+        HealthPool.Current = m_Projectiles.Count + 1;
     }
 
     private List<Vector2> appendageVelocities = new();
@@ -120,13 +125,14 @@ public class PlayerAmmunition : MonoBehaviour
 
     private void HealthChanged(int change, HealthEvent healthEvent)
     {
+        if (healthEvent == null) return; //manual update, ignore
         if (change >= 0) return; //ignore
-        var projectilesToDrop = HealthPool.Current - 1 - m_Projectiles.Count;
+        var projectilesToDrop = -(Mathf.Max(1, m_Projectiles.Count) - HealthPool.Current - 1);
         for (int i = 0; i < projectilesToDrop; i++)
         {
             var hitPos = healthEvent.Source.transform.position;
             var closestToHitPos = m_Projectiles.OrderBy(p => (p.transform.position - hitPos).sqrMagnitude).First();
-            RemoveProjectile(closestToHitPos);
+            DestroyProjectile(closestToHitPos);
         }
     }
 }

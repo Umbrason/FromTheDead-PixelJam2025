@@ -16,7 +16,8 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInput.IGameplayActionsAct
 
     public void OnAim(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        Shooting.Direction = context.ReadValue<Vector2>();
+        Shooting.CurrentAimMode = PlayerShooting.AimMode.RelativeDirection;
+        Shooting.RelativeDirection = context.ReadValue<Vector2>();
     }
 
     public void OnDash(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -43,6 +44,7 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInput.IGameplayActionsAct
 
     public void OnAimAbsolute(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        /*  */
+        Shooting.CurrentAimMode = PlayerShooting.AimMode.AbsoluteTarget;
+        Shooting.AbsoluteTarget = context.ReadValue<Vector2>();
     }
 }
