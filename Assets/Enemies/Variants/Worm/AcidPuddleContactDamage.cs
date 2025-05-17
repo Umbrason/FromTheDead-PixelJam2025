@@ -5,6 +5,9 @@ public class AcidPuddleContactDamage : MonoBehaviour
     private static float lastDamageEventTime;
     static float Tickrate = 2f;
     [SerializeField] private int DamageAmount;
+
+
+    void OnTriggerEnter(Collider c) => OnTriggerStay(c);
     void OnTriggerStay(Collider c)
     {
         var hitbox = c.GetComponentInParent<Hitbox>();

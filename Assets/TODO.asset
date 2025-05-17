@@ -18,6 +18,29 @@ MonoBehaviour:
     - title: Visual only blood stains
       content: 
       AssetRefs: []
+  - title: SFX
+    cards:
+    - title: DASH
+      content: 
+      AssetRefs: []
+    - title: ACID
+      content: 
+      AssetRefs: []
+    - title: SHOOT
+      content: 
+      AssetRefs: []
+    - title: HURT
+      content: 
+      AssetRefs: []
+    - title: 
+      content: 
+      AssetRefs: []
+    - title: 
+      content: 
+      AssetRefs: []
+    - title: 
+      content: 
+      AssetRefs: []
   - title: MVP
     cards:
     - title: Enemy Behavior

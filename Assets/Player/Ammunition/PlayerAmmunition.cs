@@ -114,7 +114,7 @@ public class PlayerAmmunition : MonoBehaviour
         for (int i = 0; i < appendagePositions.Count; i++)
         {
             if (appendageVelocities[i].sqrMagnitude > sleepThreshold * sleepThreshold) appendagePositions[i] += appendageVelocities[i] * Time.fixedDeltaTime * 3f;
-            var targetPos = transform.TransformPoint(appendagePositions[i]._x0y());
+            var targetPos = transform.TransformPoint(Vector3.ClampMagnitude(appendagePositions[i]._x0y(), 6));
             var delta = targetPos - m_Projectiles[i].transform.position;
             m_Projectiles[i].Collider.enabled = delta.sqrMagnitude <= 3 * 3;
             var force = delta / Time.fixedDeltaTime - m_Projectiles[i].Rigidbody.linearVelocity;

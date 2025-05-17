@@ -21,7 +21,8 @@ public class UpscaledCamera : MonoBehaviour
         {
             var widthDriven = new Vector2(TargetResolution.x, TargetResolution.x * ScreenBufferSize.y / (float)ScreenBufferSize.x);
             var heightDriven = new Vector2(TargetResolution.y * ScreenBufferSize.x / (float)ScreenBufferSize.y, TargetResolution.y);
-            return Vector2Int.RoundToInt(Vector2.Lerp(widthDriven, heightDriven, 1 - MatchWidth)) / 2 * 2;
+            var screenRes = Vector2Int.RoundToInt(Vector2.Lerp(widthDriven, heightDriven, 1 - MatchWidth)) / 2 * 2;
+            return screenRes + Vector2Int.one * 2;
             //TODO: add 1 pixel border to this and then smoothly move the final upscaled blit this partial pixel to preserve the fractional pixel position of this camera
         }
         public ResolutionSettings(Vector2Int TargetResolution, float MatchWidth = 0.5f)
@@ -54,5 +55,7 @@ public class UpscaledCamera : MonoBehaviour
             ppCamera.refResolutionY = Camera.targetTexture.height;
             UpscaleRenderPass.TargetTexture = targetTexture;
         }
+        var pixelPos = transform.position._xz() * 16;
+        UpscaleRenderPass.FractionalPixelOffset = new Vector2(pixelPos.x % 1, pixelPos.y % 1);
     }
 }

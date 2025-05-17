@@ -45,6 +45,6 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInput.IGameplayActionsAct
     public void OnAimAbsolute(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         Shooting.CurrentAimMode = PlayerShooting.AimMode.AbsoluteTarget;
-        Shooting.AbsoluteTarget = context.ReadValue<Vector2>();
+        Shooting.AbsoluteTarget = context.ReadValue<Vector2>() / new Vector2(Screen.width, Screen.height);
     }
 }

@@ -9,7 +9,7 @@ public class PlayerShooting : Ability
     public Vector2 AbsoluteTarget { get; set; }
     public Vector2 RelativeDirection { get; set; }
     public AimMode CurrentAimMode { get; set; }
-    Vector2 AbsoluteTargetWorldPosition => Camera.main.ScreenPointToRay(AbsoluteTarget).origin._xz();
+    Vector2 AbsoluteTargetWorldPosition => Camera.main.ViewportPointToRay(AbsoluteTarget).origin._xz();
     public Vector2 LaunchDirection => CurrentAimMode switch
     {
         AimMode.AbsoluteTarget => AbsoluteTargetWorldPosition - transform.position._xz(),
@@ -36,11 +36,11 @@ public class PlayerShooting : Ability
     [Header("Aim Indicator")]
     [SerializeField] GameObject AbsolutePositionAimIndicator;
     [SerializeField] GameObject RelativeDirectionAimIndicator;
-    [SerializeField] float RelativeDirectionAimIndicatorRange = 4f;
+    [SerializeField] float RelativeDirectionAimIndicatorRange = 5f;
     void LateUpdate()
     {
-        AbsolutePositionAimIndicator.SetActive(CurrentAimMode == AimMode.AbsoluteTarget);
-        RelativeDirectionAimIndicator.SetActive(CurrentAimMode == AimMode.RelativeDirection);
+        AbsolutePositionAimIndicator.SetActive(CurrentAimMode == AimMode.AbsoluteTarget && CanUse);
+        RelativeDirectionAimIndicator.SetActive(CurrentAimMode == AimMode.RelativeDirection && CanUse);
         switch (CurrentAimMode)
         {
             case AimMode.AbsoluteTarget:
@@ -49,10 +49,12 @@ public class PlayerShooting : Ability
                 break;
             case AimMode.RelativeDirection:
                 var childCount = RelativeDirectionAimIndicator.transform.childCount;
+                var minRadius = 2.5f;
                 for (int i = 0; i < childCount; i++)
                 {
                     var child = RelativeDirectionAimIndicator.transform.GetChild(i);
-                    child.transform.localPosition = RelativeDirection._x0y() * (i * RelativeDirectionAimIndicatorRange / childCount);
+                    var mag = RelativeDirection.magnitude;
+                    child.transform.localPosition = RelativeDirection._x0y().normalized * (mag * (RelativeDirectionAimIndicatorRange - minRadius) * i / (float)childCount + minRadius);
                 }
                 break;
         }

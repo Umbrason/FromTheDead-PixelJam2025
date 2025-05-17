@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 
 public class UpscaleRenderPass : ScriptableRenderPass
 {
+    public static Vector2 FractionalPixelOffset;
     public static RenderTexture TargetTexture;
     private readonly UpscaleRenderFeature rendererAsset;
     public UpscaleRenderPass(UpscaleRenderFeature rendererAsset)
@@ -32,6 +33,7 @@ public class UpscaleRenderPass : ScriptableRenderPass
             var texelSize = new Vector4(1f / from.x, 1f / from.y, from.x, from.y);
             rendererAsset.material.SetTexture("_EnvironmentColor", TargetTexture);
             rendererAsset.material.SetVector("_EnvironmentColor_TexelSize", texelSize);
+            rendererAsset.material.SetVector("_FractionalPixelOffset", FractionalPixelOffset);
             rendererAsset.material.SetVector("_pxPerTex", to / from);
             renderGraphContext.cmd.DrawProcedural(Matrix4x4.identity, rendererAsset.material, 0, MeshTopology.Triangles, 3);
         });

@@ -27,5 +27,6 @@ public class WormSegment : MonoBehaviour
         delta = Vector2.ClampMagnitude(delta, FollowDistance);
         targetPos += delta;
         VelocityController.AddOverwriteMovement(new((targetPos - selfPos)._x0y() / Time.fixedDeltaTime), 0, 0);
+        transform.localPosition = transform.localPosition._x0z() + Target.transform.localPosition._0y0() + Vector3.up * -.02f;
     }
 }
