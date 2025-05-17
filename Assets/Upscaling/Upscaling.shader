@@ -68,10 +68,8 @@ Shader "Hidden/PixelUpscaleColorAndDepth"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                /* return float4(_FractionalPixelOffset,0,1); */
-                i.uv -= _FractionalPixelOffset * (_EnvironmentColor_TexelSize.xy);
-                float2 tx = i.uv * (_EnvironmentColor_TexelSize.zw - float2(2,2)) + float2(1,1);
-                /* tx += float2(1, 1); */
+                i.uv += float2(1, 1) *_FractionalPixelOffset * (_EnvironmentColor_TexelSize.xy);
+                float2 tx = i.uv * (_EnvironmentColor_TexelSize.zw - float2(1, 1));
                 float2 txOffset = clamp(frac(tx) * _pxPerTex, 0, 0.5) - clamp((1 - frac(tx)) * _pxPerTex, 0, 0.5);
                 float2 uv = (floor(tx) + .5 + txOffset) * _EnvironmentColor_TexelSize.xy;
                 fixed4 col = tex2D(_EnvironmentColor, uv);
