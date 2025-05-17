@@ -4,16 +4,24 @@ using System.Linq;
 using UnityEngine;
 public class PlayerAmmunition : MonoBehaviour
 {
-    private readonly List<Projectile> ShootingQueue = new();
-    public Projectile Next => ShootingQueue.FirstOrDefault();
+    private readonly List<Projectile> m_ShootingQueue = new();
+    public Projectile Next => m_ShootingQueue.FirstOrDefault();
+    public IReadOnlyList<Projectile> ShootingQueue => m_ShootingQueue;
+
+    public Action<Projectile> OnProjectileAdded;
+    public Action<Projectile> OnProjectileRemoved;
+    public Action OnShootingQueueChanged;
+
     public Projectile RemoveProjectile(Projectile p)
     {
         var idx = m_Projectiles.IndexOf(p);
         appendagePositions.RemoveAt(idx);
         appendageVelocities.RemoveAt(idx);
         m_Projectiles.Remove(p);
-        ShootingQueue.Remove(p);
+        m_ShootingQueue.Remove(p);
         HealthPool.Current = m_Projectiles.Count + 1;
+        OnProjectileRemoved?.Invoke(p);
+        OnShootingQueueChanged?.Invoke();
         return p;
     }
     public void DestroyProjectile(Projectile p)
@@ -61,11 +69,13 @@ public class PlayerAmmunition : MonoBehaviour
         if (HealthPool.Current == HealthPool.Size) return; //full
         if (m_Projectiles.Contains(projectile)) return;
         m_Projectiles.Add(projectile);
-        ShootingQueue.Add(projectile);
+        m_ShootingQueue.Add(projectile);
+        OnShootingQueueChanged?.Invoke();
         appendagePositions.Add(transform.InverseTransformPoint(projectile.transform.position)._xz());
         appendageVelocities.Add(default);
         projectile.OnCollect(this);
         HealthPool.Current = m_Projectiles.Count + 1;
+        OnProjectileAdded?.Invoke(projectile);
     }
 
     private List<Vector2> appendageVelocities = new();

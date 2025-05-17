@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [field: SerializeField] public Sprite UIIcon { get; private set; }
     private Cached<VelocityController> cached_VelocityController;
     private VelocityController VelocityController => cached_VelocityController[this];
 

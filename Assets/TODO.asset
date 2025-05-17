@@ -15,7 +15,7 @@ MonoBehaviour:
   Columns:
   - title: Polish
     cards:
-    - title: Visual only blood stains
+    - title: Visual only blood stains & gore on  enemy death
       content: 
       AssetRefs: []
   - title: SFX
@@ -43,40 +43,55 @@ MonoBehaviour:
       AssetRefs: []
   - title: MVP
     cards:
-    - title: Enemy Behavior
+    - title: ENEMIES
       content: 
       AssetRefs: []
-    - title: Worm
+    - title: Worm (Intestines)
       content: 
       AssetRefs: []
-    - title: Brain
+    - title: Brain (Brain)
       content: 
       AssetRefs: []
-    - title: Eye Fly
+    - title: Eye Fly (Eye)
       content: 
       AssetRefs: []
-    - title: Hand Spider
+    - title: Hand Spider (Bone)
+      content: 
+      AssetRefs: []
+    - title: Bone Dog (Heart)
+      content: 
+      AssetRefs: []
+    - title: Ribcage (Rib)
       content: 
       AssetRefs: []
     - title: 
       content: 
       AssetRefs: []
-    - title: Projectile Variants
+    - title: PROJECTILE VARIANTS
       content: 
       AssetRefs: []
-    - title: Eye
+    - title: Eye (Bounces from enemies & walls)
       content: 
       AssetRefs: []
-    - title: Bonemerang
+    - title: Brain (Hoaming Shot)
       content: 
       AssetRefs: []
-    - title: Brain
+    - title: Intestines (Leave Blood Puddle Trail)
       content: 
       AssetRefs: []
-    - title: Intestines
+    - title: Heart (Explodes into AOE)
       content: 
       AssetRefs: []
-    - title: Heart
+    - title: Bone (Piercing)
+      content: 
+      AssetRefs: []
+    - title: Rib (Piercing, Returns to throw position)
+      content: 
+      AssetRefs: []
+    - title: 
+      content: 
+      AssetRefs: []
+    - title: WAVE SPAWNING SYSTEM
       content: 
       AssetRefs: []
   - title: Done
