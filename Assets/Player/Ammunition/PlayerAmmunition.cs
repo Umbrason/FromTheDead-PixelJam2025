@@ -90,13 +90,14 @@ public class PlayerAmmunition : MonoBehaviour
     [SerializeField] private float sleepThreshold = .01f;
     [SerializeField] private float squishForce = 20f;
     [SerializeField] private float accelerationForce = 20f;
+    [SerializeField] private float InnerRadius = .5f;
     private void FixedUpdate()
     {
         while (appendageVelocities.Count < appendagePositions.Count) appendageVelocities.Add(default);
         for (int i = 0; i < appendagePositions.Count; i++)
         {
             var pos = appendagePositions[i];
-            appendageVelocities[i] += appendagePositions[i] * (1 - appendagePositions[i].sqrMagnitude) * Time.fixedDeltaTime * coreAttractionStrength;
+            appendageVelocities[i] += appendagePositions[i] * (InnerRadius - appendagePositions[i].sqrMagnitude) * Time.fixedDeltaTime * coreAttractionStrength;
             appendageVelocities[i] += -Rigidbody.linearVelocity._xz() * Time.fixedDeltaTime * accelerationForce;
             var perpendicular = Vector2.Perpendicular(Rigidbody.linearVelocity._xz());
             appendageVelocities[i] -= Vector2.Dot(appendagePositions[i], perpendicular.normalized) * perpendicular.normalized * squishForce * Time.fixedDeltaTime;
