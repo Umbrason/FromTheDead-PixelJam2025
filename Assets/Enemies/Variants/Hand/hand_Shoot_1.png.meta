@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b956b1332397c09f986a0dd02b57dc28
+guid: 1010375afc4b57ed899878f8f426cfb4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7841643872434289406
-    second: hand_0_0
+      213: -8139038840987329212
+    second: hand_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hand_0_0
+      name: hand_2_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 0
-        width: 24
-        height: 24
+        width: 21
+        height: 27
       alignment: 9
-      pivot: {x: 0.5208333, y: 0.5208333}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efa709f1e8d13dc60800000000000000
-      internalID: 7841643872434289406
+      spriteID: 44dd7ddeb435c0f80800000000000000
+      internalID: -8139038840987329212
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c82da4b8fc30bc8fcb226706db7f8b08
-    internalID: -1084027086
+    spriteID: cf8ba74c8e7ecb666bb24e4c47abc729
+    internalID: 40949902
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      hand_0_0: 7841643872434289406
+      hand_2_0: -8139038840987329212
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -11,7 +11,7 @@ public class Ability : MonoBehaviour
     protected virtual void Awake() => m_cooldownStart = -CooldownDuration * AvailableCharges;
 
     public int AvailableCharges => System.Math.Min(Charges, (int)System.Math.Floor((Time.time - m_cooldownStart) / CooldownDuration));
-    public virtual int Charges => 2;
+    public virtual int Charges => 1;
 
     public virtual bool CanUse => true;
     private float m_useStartTime = float.PositiveInfinity;

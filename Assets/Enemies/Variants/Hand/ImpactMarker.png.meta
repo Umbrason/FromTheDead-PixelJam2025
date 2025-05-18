@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06f49fc202fea879a9afbc844ad2f1fb
+guid: 31d8028b6398eda7c9b42ea3bff27f6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1025721392546088790
-    second: Unbenanntes_Projektffffffffffffffff_0016_Aus-Auswahl_0
+      213: 5008624904653941793
+    second: ImpactMarker_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.5416667}
+  spritePivot: {x: 0.5277778, y: 0.55}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Unbenanntes_Projektffffffffffffffff_0016_Aus-Auswahl_0
+      name: ImpactMarker_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 17
-        height: 12
+        width: 16
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa875c6f3d7e3c1f0800000000000000
-      internalID: -1025721392546088790
+      spriteID: 12ca21f50d5328540800000000000000
+      internalID: 5008624904653941793
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 92dbbd854409d725286e89ac5579458c
+    internalID: 31354822
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Unbenanntes_Projektffffffffffffffff_0016_Aus-Auswahl_0: -1025721392546088790
+      ImpactMarker_0: 5008624904653941793
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

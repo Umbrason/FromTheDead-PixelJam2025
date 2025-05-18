@@ -43,24 +43,40 @@ public static class EnemyBrainUtils
     public static IEnumerator ParallelBehaviour(params IEnumerator[] behaviours)
     {
         var unfinishedBehaviours = behaviours.ToList();
-
+        Dictionary<IEnumerator, Stack<IEnumerator>> subroutineStack = new();
+        foreach (var b in unfinishedBehaviours)
+        {
+            subroutineStack[b] = new();
+            subroutineStack[b].Push(b);
+        }
         while (unfinishedBehaviours.Count > 0)
         {
             var finishedBehaviours = new List<IEnumerator>();
             foreach (var b in unfinishedBehaviours)
             {
-                if (!b.MoveNext())
-                    finishedBehaviours.Add(b);
+                var routine = subroutineStack[b].Peek();
+                if (routine.MoveNext() == false)
+                    subroutineStack[b].Pop();
+                else if (routine.Current is IEnumerator e) subroutineStack[b].Push(e);
+                if (subroutineStack[b].Count == 0) finishedBehaviours.Add(b);
             }
-            foreach (var finishedBehaviour in finishedBehaviours)
-                unfinishedBehaviours.Remove(finishedBehaviour);
+            foreach (var finishedBehaviour in finishedBehaviours) unfinishedBehaviours.Remove(finishedBehaviour);
             yield return null;
         }
     }
 
     public static IEnumerator BehaviourWithExitCondition(IEnumerator baseBehaviour, Func<bool> exitCondition)
     {
-        do yield return baseBehaviour.Current;
-        while (!(exitCondition?.Invoke() ?? true) && baseBehaviour.MoveNext());
+        Stack<IEnumerator> subroutineStack = new();
+        subroutineStack.Push(baseBehaviour);
+        do
+        {
+            var routine = subroutineStack.Peek();
+            if (routine.MoveNext() == false) subroutineStack.Pop();
+            else if (routine.Current is IEnumerator e) subroutineStack.Push(e);
+            if (subroutineStack.Count == 0) break;
+            yield return routine;
+        }
+        while (!(exitCondition?.Invoke() ?? true));
     }
 }

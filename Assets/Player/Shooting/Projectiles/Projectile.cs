@@ -47,6 +47,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int minFlightHeightInPixels = 6;
     [SerializeField] private int currentFlightHeightInPixels;
     [SerializeField] private int maxflightHeightInPixels = 10;
+    [SerializeField] private float maxFlightTime = 1f;
     private float currentFlightHeight => currentFlightHeightInPixels / 16f;
     [SerializeField] private float dropAnimationDuration = .25f;
     [SerializeField] GameObject DropImpactVFX;
@@ -137,12 +138,12 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         if (CurrentState != State.Shooting) return;
-        var t = FlightTime / 2f;
+        var t = FlightTime / maxFlightTime;
         t = 1 - (t * 2 - 1) * (t * 2 - 1);
         currentFlightHeightInPixels = Mathf.RoundToInt(Mathf.Lerp(minFlightHeightInPixels, maxflightHeightInPixels, t));
         Visual.transform.localPosition = Vector3.forward * currentFlightHeight;
         VelocityController.AddOverwriteMovement(new(ModifiedDirection._x0y().normalized * ModifiedSpeed + SpeedAtLaunch._x0y()), 0f, 0);
-        if (FlightTime > 2) Drop();
+        if (FlightTime > maxFlightTime) Drop();
     }
 
     private HealthEvent damageEvent;

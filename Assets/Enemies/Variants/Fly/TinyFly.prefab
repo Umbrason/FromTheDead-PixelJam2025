@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Current
       value: 
       objectReference: {fileID: 11400000, guid: 62327e6023c9d4024974468bd1b240d1, type: 2}
+    - target: {fileID: 3458073826067032332, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3627109600796310022, guid: e8d1b638075aff211a63c33168e44046, type: 3}
       propertyPath: m_Name
       value: TinyFly
@@ -88,6 +92,18 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 341007309051045811, guid: ca0e8d456101ee9429a91d6231dbf72c, type: 3}
+    - target: {fileID: 8869332277326483592, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869332277326483592, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8869332277326483592, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 800592898151714889, guid: e8d1b638075aff211a63c33168e44046, type: 3}
     m_RemovedGameObjects: []
@@ -122,7 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Creator: {fileID: 0}
   playerDetectionRange: 10
-  playerChaseSpeed: 5
+  playerChaseSpeed: 8
   circlingSpeed: 4
   circlingRadius: 1.5
 --- !u!114 &1957087432354215196

@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: m_Current
       value: 
       objectReference: {fileID: 11400000, guid: 8168824a0d89f5e2cbc2d79efaeb2fe7, type: 2}
+    - target: {fileID: 3458073826067032332, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458073826067032332, guid: e8d1b638075aff211a63c33168e44046, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3627109600796310022, guid: e8d1b638075aff211a63c33168e44046, type: 3}
       propertyPath: m_Name
       value: BigFly

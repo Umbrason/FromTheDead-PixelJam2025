@@ -48,7 +48,7 @@ public class BigFlyBrain : BaseEnemyBrain
                 for (int i = 0; i < fliesToSpawn; i++)
                 {
                     this.Animator.Current = SpawnAnimation;
-                    yield return new WaitUntil(() => this.Animator.LoopCount >= i);
+                    yield return new WaitUntil(() => this.Animator.LoopCount >= 1);
                     var spawnAngle = (i + Random.value) / fliesToSpawn * Mathf.PI * 2;
                     var spawnDirection = new Vector2(Mathf.Sin(spawnAngle), Mathf.Cos(spawnAngle));
                     var newFly = Instantiate(tinyFlyTemplate, transform.position + spawnDirection._x0y() * .25f, Quaternion.identity);

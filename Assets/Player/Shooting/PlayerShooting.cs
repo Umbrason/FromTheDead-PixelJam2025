@@ -24,6 +24,7 @@ public class PlayerShooting : Ability
     Rigidbody Rigidbody => cached_Rigidbody[this];
 
     public override bool CanUse => LaunchDirection.sqrMagnitude > .01f && PlayerAmmunition.Next != null;
+    public override float CooldownDuration => .5f;
 
     public override void OnPress()
     {

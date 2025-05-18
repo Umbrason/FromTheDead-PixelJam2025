@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ContactDamage : MonoBehaviour
@@ -17,6 +18,8 @@ public class ContactDamage : MonoBehaviour
         {
             if (report.changeAmount != 0 && destroyAfter && gameObject != null) Destroy(gameObject);
         };
+        foreach (var hitbox in activeCollisions.Keys.ToArray())
+            if (hitbox == null) activeCollisions.Remove(hitbox);
         foreach (var hitbox in activeCollisions.Keys)
         {
             hitbox.RegisterDamageEvent(dmgEvent);

@@ -10,19 +10,22 @@ public class TinyFlyBrain : BaseEnemyBrain
     [SerializeField] private float circlingRadius = 1.5f;
     protected override IEnumerator FirstThought()
     {
-        var deltaFromCreator = SelfPosition() - Creator.SelfPosition();
-        var startAngle = -Vector2.SignedAngle(Vector2.up, deltaFromCreator.normalized) / 180f * Mathf.PI; //why counter clockwise?! who the fuck designed this
-        yield return EnemyBrainUtils.BehaviourWithExitCondition(CircleCreator(startAngle), PlayerInRange);
+        if (Creator)
+        {
+            var deltaFromCreator = SelfPosition() - Creator.SelfPosition();
+            var startAngle = -Vector2.SignedAngle(Vector2.up, deltaFromCreator.normalized) / 180f * Mathf.PI; //why counter clockwise?! who the fuck designed this
+            yield return EnemyBrainUtils.BehaviourWithExitCondition(CircleCreator(startAngle), PlayerInRange);
+        }
         yield return RushPlayer();
     }
-    bool PlayerInRange() => EnemyBrainUtils.PlayerDistance(SelfPosition()) <= playerDetectionRange;
+    bool PlayerInRange() => (EnemyBrainUtils.PlayerDistance(SelfPosition()) <= playerDetectionRange) || (Creator == null);
     IEnumerator CircleCreator(float startAngle)
     {
         var direction = Random.value > .5 ? 1 : -1;
         var segments = Mathf.PI / Mathf.Asin(circlingSpeed * Time.fixedDeltaTime / circlingRadius);
         segments = Mathf.RoundToInt(segments);
-        Vector2 calcTargetPos(float angle) => new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * circlingRadius + Creator.SelfPosition();
-        while (true)
+        Vector2 calcTargetPos(float angle) => Creator == null ? SelfPosition() : new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * circlingRadius + Creator.SelfPosition();
+        while (Creator != null)
         {
             for (int i = 0; i < segments; i++)
             {
