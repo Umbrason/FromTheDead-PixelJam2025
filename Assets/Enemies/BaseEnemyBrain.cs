@@ -14,7 +14,7 @@ public abstract class BaseEnemyBrain : MonoBehaviour
 
     Coroutine CurrentThoughts;
     protected abstract IEnumerator FirstThought();
-    protected Vector2 SelfPosition() => transform.position._xz();
+    public Vector2 SelfPosition() => transform.position._xz();
 
     void Start() => CurrentThoughts = StartCoroutine(FirstThought());
 

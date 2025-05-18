@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: abdfd9b7b46c41c148c89ef03d65b5df
+guid: be94ec8c0a25d6298940e6cd249dd188
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2337357852494968475
-    second: big_fly_0_0
+      213: 6660626706810862398
+    second: big_fly_Spawn6_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: big_fly_0_0
+      name: big_fly_Spawn6_0
       rect:
         serializedVersion: 2
         x: 4
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b96beee3596ff6020800000000000000
-      internalID: 2337357852494968475
+      spriteID: e3bf0f843bc4f6c50800000000000000
+      internalID: 6660626706810862398
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 047e7891892730c07bd4ad66da4a9224
-    internalID: 288092462
+    spriteID: 6175b00d5ce09c8649b43403a60f4d3e
+    internalID: -1591378331
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      big_fly_0_0: 2337357852494968475
+      big_fly_Spawn6_0: 6660626706810862398
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

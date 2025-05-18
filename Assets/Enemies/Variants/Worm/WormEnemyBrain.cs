@@ -22,7 +22,6 @@ public class WormEnemyBrain : BaseEnemyBrain
             yield return EnemyBrainUtils.Patrol(SelfPosition, isPlayerInRange, patrolTargetProvider, MoveLinear, null);
 
             //player must be in trigger range to reach this point
-
             var deltaFromPlayer = default(Vector2);
             do
             {

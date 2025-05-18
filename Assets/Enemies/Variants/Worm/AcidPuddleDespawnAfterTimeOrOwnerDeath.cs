@@ -5,8 +5,10 @@ public class AcidPuddleDespawnAfterTimeOrOwnerDeath : MonoBehaviour
 {
     public GameObject Owner;
 
-    [SerializeField] private float Lifetime = 5f;
+    [SerializeField] private float Lifetime = 3f;
     private float spawnTime;
+
+    [SerializeField] Collider sphereCollider;
 
     void OnEnable() => spawnTime = Time.time;
     bool despawning;
@@ -22,6 +24,7 @@ public class AcidPuddleDespawnAfterTimeOrOwnerDeath : MonoBehaviour
 
     IEnumerator Despawn()
     {
+        Destroy(sphereCollider);
         var t = 0f;
         while (t < 1)
         {

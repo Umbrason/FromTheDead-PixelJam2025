@@ -38,10 +38,10 @@ public class Projectile : MonoBehaviour
     protected virtual Vector2 ModifiedDirection => LaunchDirection;
 
     void Awake() => Drop();
-    protected virtual void OnHit(Hitbox hitbox, Vector3 point, Vector3 normal)
+    protected virtual void OnHit(Hitbox hitbox, Vector3 point, Vector3 normal, bool isPiercing = false)
     {
         if (hitbox != null) hitbox.RegisterDamageEvent(damageEvent);
-        Drop();
+        if (!isPiercing) Drop();
     }
 
     [SerializeField] private int minFlightHeightInPixels = 6;
@@ -62,7 +62,7 @@ public class Projectile : MonoBehaviour
             DroppedIndicator.transform.localScale = Vector3.one * t;
             yield return null;
         }
-        DropImpactVFX.gameObject.SetActive(true);
+        DropImpactVFX.SetActive(CurrentState == State.Dropped);
         DroppedIndicator.transform.localScale = Vector3.one;
         Visual.transform.localPosition = default;
     }
@@ -98,11 +98,11 @@ public class Projectile : MonoBehaviour
             if (owner != null) owner.gameObject.SendMessageUpwards(nameof(OnTriggerEnter), other);
             return;
         }
-        if (other.isTrigger) return; //only meant for piercing projectiles hitting regular hitboxes
+        /* if (other.isTrigger) return; //only meant for piercing projectiles hitting regular hitboxes */
         var hitbox = other.GetComponentInParent<Hitbox>();
         var generatedPos = other.ClosestPoint(transform.position);
         var generatedNormal = (transform.position - generatedPos).normalized;
-        OnHit(hitbox, generatedPos, generatedNormal);
+        OnHit(hitbox, generatedPos, generatedNormal, true);
     }
 
     PlayerAmmunition owner;

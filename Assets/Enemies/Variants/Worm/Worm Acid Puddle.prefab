@@ -4956,4 +4956,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Owner: {fileID: 0}
-  Lifetime: 5
+  Lifetime: 3
+  sphereCollider: {fileID: 4388155708930822570}

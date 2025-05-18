@@ -5,6 +5,7 @@ public class ContactDamage : MonoBehaviour
 {
     [Tooltip("Damage events per second")][SerializeField] private float tickRate;
     [SerializeField] private int damage;
+    [SerializeField] private bool destroyAfter;
     private float lastTick;
     private readonly Dictionary<Hitbox, int> activeCollisions = new();
     void FixedUpdate()
@@ -12,8 +13,15 @@ public class ContactDamage : MonoBehaviour
         if (lastTick + (1f / tickRate) >= Time.time) return;
         lastTick = Time.time;
         var dmgEvent = HealthEvent.Damage((uint)damage, source: gameObject);
+        dmgEvent.OnHitHealthPool += (report) =>
+        {
+            if (report.changeAmount != 0 && destroyAfter && gameObject != null) Destroy(gameObject);
+        };
         foreach (var hitbox in activeCollisions.Keys)
+        {
             hitbox.RegisterDamageEvent(dmgEvent);
+        }
+
     }
     private void OnCollisionEnter(Collision collision)
     {

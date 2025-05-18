@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class EnemyBrainUtils
@@ -36,5 +38,29 @@ public static class EnemyBrainUtils
             }
             OnTargetReached?.Invoke();
         }
+    }
+
+    public static IEnumerator ParallelBehaviour(params IEnumerator[] behaviours)
+    {
+        var unfinishedBehaviours = behaviours.ToList();
+
+        while (unfinishedBehaviours.Count > 0)
+        {
+            var finishedBehaviours = new List<IEnumerator>();
+            foreach (var b in unfinishedBehaviours)
+            {
+                if (!b.MoveNext())
+                    finishedBehaviours.Add(b);
+            }
+            foreach (var finishedBehaviour in finishedBehaviours)
+                unfinishedBehaviours.Remove(finishedBehaviour);
+            yield return null;
+        }
+    }
+
+    public static IEnumerator BehaviourWithExitCondition(IEnumerator baseBehaviour, Func<bool> exitCondition)
+    {
+        do yield return baseBehaviour.Current;
+        while (!(exitCondition?.Invoke() ?? true) && baseBehaviour.MoveNext());
     }
 }

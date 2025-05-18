@@ -104,7 +104,7 @@ public class PlayerAmmunition : MonoBehaviour
             {
                 var delta = j == i ? pos : pos - appendagePositions[j];
                 var sqrMag = delta.sqrMagnitude;
-                if (sqrMag == 0) continue;
+                while ((sqrMag = delta.sqrMagnitude) == 0) delta = UnityEngine.Random.insideUnitCircle * 1f;
                 if (sqrMag <= 0.1f)
                     sqrMag = .1f;
                 delta = delta.normalized / sqrMag;
