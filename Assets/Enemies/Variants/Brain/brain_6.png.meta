@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c8c5aced7b0f94f768dfcef26d82bfb5
+guid: a07f4c783f9f805ad8557bf88eaaa63f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3608764000974475400
-    second: brain_2_0
+      213: 5152360649358785425
+    second: brain_6_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brain_2_0
+      name: brain_6_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 0
         y: 0
-        width: 26
-        height: 22
+        width: 27
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87fe2bbd2481bedc0800000000000000
-      internalID: -3608764000974475400
+      spriteID: 19b3bb356bcd08740800000000000000
+      internalID: 5152360649358785425
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2a0cd037654bccc809200308b8158ae0
-    internalID: -1064082313
+    spriteID: 814dd02c632efadea8f73e6a5a320759
+    internalID: 1321295785
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      brain_2_0: -3608764000974475400
+      brain_6_0: 5152360649358785425
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

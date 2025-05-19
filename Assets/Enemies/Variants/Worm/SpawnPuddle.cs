@@ -15,6 +15,5 @@ public class SpawnPuddle : MonoBehaviour
         lastPosition = selfPos;
         var instance = Instantiate(PuddlePrefab, transform.position, Quaternion.identity);
         instance.Owner = gameObject;
-
     }
 }

@@ -41,8 +41,11 @@ public class HandBrain : BaseEnemyBrain
                 VelocityController.AddOverwriteMovement(new(Vector2.zero), 0, 0);
                 yield return new WaitForFixedUpdate();
             }
-            var spawnPosition = EnemyBrainUtils.RandomPatrolPosition(EnemyBrainUtils.PlayerPosition(), 2f, attackRadius);
-            Instantiate(boneAttackTemplate, spawnPosition._x0y(), Quaternion.identity);
+            for (int j = 0; j < 2; j++)
+            {
+                var spawnPosition = EnemyBrainUtils.RandomPatrolPosition(EnemyBrainUtils.PlayerPosition(), 2f, attackRadius);
+                Instantiate(boneAttackTemplate, spawnPosition._x0y(), Quaternion.identity);
+            }
         }
     }
 }

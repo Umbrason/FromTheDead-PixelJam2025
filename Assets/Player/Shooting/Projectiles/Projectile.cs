@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
 
     [field: SerializeField] protected int BaseDamage { get; private set; } = 1;
     [field: SerializeField] protected float LaunchSpeed { get; private set; } = 5;
+    [field: SerializeField] protected bool isPiercingProjectile;
     protected Vector2 LaunchDirection { get; private set; }
 
     public State CurrentState { get; private set; } = State.Shooting;
@@ -47,7 +48,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int minFlightHeightInPixels = 6;
     [SerializeField] private int currentFlightHeightInPixels;
     [SerializeField] private int maxflightHeightInPixels = 10;
-    [SerializeField] private float maxFlightTime = 1f;
+    [field: SerializeField] protected virtual float maxFlightTime { get; } = 1f;
     private float currentFlightHeight => currentFlightHeightInPixels / 16f;
     [SerializeField] private float dropAnimationDuration = .25f;
     [SerializeField] GameObject DropImpactVFX;
@@ -76,6 +77,7 @@ public class Projectile : MonoBehaviour
             if (owner != null) owner.gameObject.SendMessageUpwards(nameof(OnCollisionEnter), collision);
             return;
         }
+        if (CurrentState != State.Shooting) return;
         var hitbox = collision.collider.GetComponentInParent<Hitbox>();
         if (hitbox != null)
             contactPoints.Clear();
@@ -99,11 +101,11 @@ public class Projectile : MonoBehaviour
             if (owner != null) owner.gameObject.SendMessageUpwards(nameof(OnTriggerEnter), other);
             return;
         }
-        /* if (other.isTrigger) return; //only meant for piercing projectiles hitting regular hitboxes */
+        if (CurrentState != State.Shooting) return;
         var hitbox = other.GetComponentInParent<Hitbox>();
         var generatedPos = other.ClosestPoint(transform.position);
         var generatedNormal = (transform.position - generatedPos).normalized;
-        OnHit(hitbox, generatedPos, generatedNormal, true);
+        OnHit(hitbox, generatedPos, generatedNormal, other.isTrigger || (other.gameObject.layer > 0));
     }
 
     PlayerAmmunition owner;
@@ -126,16 +128,17 @@ public class Projectile : MonoBehaviour
     protected void Drop()
     {
         if (CurrentState != State.Shooting) return;
+        damageEvent = null;
         Collider.isTrigger = true;
         transform.SetLayerRecursive(0);
         CurrentState = State.Dropped;
         launchStartTime = float.PositiveInfinity;
         Rigidbody.isKinematic = true;
-        damageEvent = null;
+        VelocityController.AddOverwriteMovement(new(default), 0, 1);
         StartCoroutine(DropAnimation());
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         if (CurrentState != State.Shooting) return;
         var t = FlightTime / maxFlightTime;
@@ -147,7 +150,7 @@ public class Projectile : MonoBehaviour
     }
 
     private HealthEvent damageEvent;
-    public void Shoot(Vector2 direction, Vector2 speedAtLaunch)
+    public virtual void Shoot(Vector2 direction, Vector2 speedAtLaunch)
     {
         if (CurrentState != State.Collected) return;
         Visual.transform.localPosition = Vector3.forward * currentFlightHeight;
@@ -162,5 +165,6 @@ public class Projectile : MonoBehaviour
         LaunchDirection = direction;
         SpeedAtLaunch = default;
         damageEvent = HealthEvent.Damage((uint)BaseDamage, source: gameObject);
+        Collider.isTrigger = isPiercingProjectile;
     }
 }

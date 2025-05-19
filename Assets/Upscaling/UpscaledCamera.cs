@@ -39,7 +39,7 @@ public class UpscaledCamera : MonoBehaviour
         if (targetTexture) DestroyImmediate(targetTexture);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         var resolution = resolutionSettings.CalculateResolution(new(Screen.width, Screen.height));
         if (targetTexture == null || targetTexture.width != resolution.x || targetTexture.height != resolution.y)
@@ -55,7 +55,10 @@ public class UpscaledCamera : MonoBehaviour
             ppCamera.refResolutionY = Camera.targetTexture.height;
             UpscaleRenderPass.TargetTexture = targetTexture;
         }
-        var pixelPos = Vector2Int.FloorToInt(transform.position._xz() * 16 + Vector2.right * .5f);
-        UpscaleRenderPass.FractionalPixelOffset = transform.position._xz() * 16 + Vector2.right * .5f - pixelPos;
+        var worldPos = transform.parent.position._xz();
+        var pixelPos = Vector2Int.FloorToInt(worldPos * 16);
+        var fractionalOffset = worldPos * 16 - pixelPos;
+        transform.localPosition = -fractionalOffset._xy0() / 16f + transform.localPosition._00z();
+        UpscaleRenderPass.FractionalPixelOffset = fractionalOffset;
     }
 }

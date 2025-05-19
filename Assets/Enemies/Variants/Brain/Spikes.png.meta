@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c8c5aced7b0f94f768dfcef26d82bfb5
+guid: 5f01a9c23157d37e19522c5365b3eee2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3608764000974475400
-    second: brain_2_0
+      213: 6723963429988506304
+    second: Spikes_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.5208333}
+  spritePivot: {x: 0.515625, y: 0.515625}
   spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: brain_2_0
+      name: Spikes_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 0
-        width: 26
-        height: 22
+        x: 2
+        y: 3
+        width: 29
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87fe2bbd2481bedc0800000000000000
-      internalID: -3608764000974475400
+      spriteID: 0ca9e2f4d11505d50800000000000000
+      internalID: 6723963429988506304
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2a0cd037654bccc809200308b8158ae0
-    internalID: -1064082313
+    spriteID: a8d6a4b0ba00e7268a7513d64ce73106
+    internalID: 788276701
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      brain_2_0: -3608764000974475400
+      Spikes_0: 6723963429988506304
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

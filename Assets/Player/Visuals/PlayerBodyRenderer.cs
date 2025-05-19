@@ -69,11 +69,14 @@ public class PlayerBodyRenderer : MonoBehaviour
             MeshRenderer.SetPropertyBlock(block);
         }
         var positionsData = PlayerAmmunition.AppendagePositions.Prepend(default).ToArray();
-        for (int i = 0; i < positionsData.Length; i++)
-            positionsData[i] = (Vector2)Vector2Int.RoundToInt(positionsData[i] * 16 + Vector2.one * .5f) / 16f;
+        /* for (int i = 0; i < positionsData.Length; i++)
+            positionsData[i] = (Vector2)Vector2Int.RoundToInt(positionsData[i] * 16 + Vector2.one * .5f) / 16f; */
         var velocityData = PlayerAmmunition.AppendageVelocities.Prepend(default).ToArray();
         for (int i = 0; i < velocityData.Length; i++)
+        {
             velocityData[i] += Rigidbody.linearVelocity._xz();
+            velocityData[i] *= (Mathf.Sin(Time.time * 3.141f * 2f * 2f) + 1) / 2f;
+        }
         positionsTexture.SetPixelData(positionsData, 0, 0);
         velocityTexture.SetPixelData(velocityData, 0, 0);
         positionsTexture.Apply();

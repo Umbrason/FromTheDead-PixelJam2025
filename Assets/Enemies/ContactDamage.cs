@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class ContactDamage : MonoBehaviour
     [SerializeField] private bool destroyAfter;
     private float lastTick;
     private readonly Dictionary<Hitbox, int> activeCollisions = new();
+
+    public Action OnTriggered;
     void FixedUpdate()
     {
         if (lastTick + (1f / tickRate) >= Time.time) return;
@@ -22,7 +25,9 @@ public class ContactDamage : MonoBehaviour
             if (hitbox == null) activeCollisions.Remove(hitbox);
         foreach (var hitbox in activeCollisions.Keys)
         {
+            if (!hitbox.enabled) continue;
             hitbox.RegisterDamageEvent(dmgEvent);
+            OnTriggered?.Invoke();
         }
 
     }

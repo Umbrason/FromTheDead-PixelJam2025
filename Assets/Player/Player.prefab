@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 2714900510443817832}
   - component: {fileID: 2125919950243798464}
   m_Layer: 0
-  m_Name: Mouth
+  m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +177,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -8500371682742039450, guid: f1ed89af3cc901daf8c5f1d196fbf98c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1928b08d8aca9b4b19b78625e1f07013, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3d65c39e61f28e3ac004fde5e6502f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Current: {fileID: 11400000, guid: ce2db1c17aee009a78807a5b281ba803, type: 2}
+  m_Current: {fileID: 11400000, guid: e5fd18adb20f533d490dfe508c2ae02d, type: 2}
 --- !u!1 &3358433096232449063
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +584,7 @@ MonoBehaviour:
   sleepThreshold: 0.01
   squishForce: 20
   accelerationForce: 20
+  InnerRadius: 0.5
 --- !u!114 &1136504170372003889
 MonoBehaviour:
   m_ObjectHideFlags: 0

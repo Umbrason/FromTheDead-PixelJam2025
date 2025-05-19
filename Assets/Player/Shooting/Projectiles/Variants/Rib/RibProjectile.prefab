@@ -61,6 +61,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 20c0e46f7629dd1f59e5995c81926e36, type: 3}
     - target: {fileID: 3805917948867002143, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+      propertyPath: isPiercingProjectile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3805917948867002143, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
       propertyPath: <UIIcon>k__BackingField
       value: 
       objectReference: {fileID: 21300000, guid: 0eeff9e82d1672c0c8347c868ea38d98, type: 3}
@@ -104,8 +108,61 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.minColor.r
       value: 0.3962264
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3805917948867002143, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3647308973161029776, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 2631619001234392006}
   m_SourcePrefab: {fileID: 100100000, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+--- !u!1 &483831841815524064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3647308973161029776, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+  m_PrefabInstance: {fileID: 3759153637263430256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2631619001234392006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483831841815524064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe097eb79e3cc34c8f04718af407950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <UIIcon>k__BackingField: {fileID: 21300000, guid: 0eeff9e82d1672c0c8347c868ea38d98, type: 3}
+  <BaseDamage>k__BackingField: 1
+  <LaunchSpeed>k__BackingField: 20
+  isPiercingProjectile: 1
+  DroppedIndicator: {fileID: 983099635248931408}
+  Shadow: {fileID: 4438786598784880581}
+  Visual: {fileID: 7796854324937634217}
+  minFlightHeightInPixels: 2
+  currentFlightHeightInPixels: 0
+  maxflightHeightInPixels: 10
+  dropAnimationDuration: 0.2
+  DropImpactVFX: {fileID: 8722532299962864263}
+--- !u!1 &983099635248931408 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4147702798137454624, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+  m_PrefabInstance: {fileID: 3759153637263430256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4438786598784880581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 698777796534738357, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+  m_PrefabInstance: {fileID: 3759153637263430256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7796854324937634217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6348052244454466521, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+  m_PrefabInstance: {fileID: 3759153637263430256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8722532299962864263 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5559582385514479863, guid: e20bb0d307c46e80f990e20b85dbd366, type: 3}
+  m_PrefabInstance: {fileID: 3759153637263430256}
+  m_PrefabAsset: {fileID: 0}
