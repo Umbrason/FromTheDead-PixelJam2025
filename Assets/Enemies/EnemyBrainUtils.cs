@@ -75,7 +75,9 @@ public static class EnemyBrainUtils
             if (routine.MoveNext() == false) subroutineStack.Pop();
             else if (routine.Current is IEnumerator e) subroutineStack.Push(e);
             if (subroutineStack.Count == 0) break;
-            yield return routine;
+            if (routine.Current is YieldInstruction)
+                yield return routine.Current;
+            else yield return null;
         }
         while (!(exitCondition?.Invoke() ?? true));
     }

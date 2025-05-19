@@ -6,7 +6,7 @@ public class UpscaleRenderFeature : ScriptableRendererFeature
     public Material material;
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        pass.renderPassEvent = RenderPassEvent.AfterRendering;
+        pass.renderPassEvent = RenderPassEvent.BeforeRenderingOpaques;
         renderer.EnqueuePass(pass);
     }
 

@@ -8,7 +8,7 @@ public class ContactDamage : MonoBehaviour
     [Tooltip("Damage events per second")][SerializeField] private float tickRate;
     [SerializeField] private int damage;
     [SerializeField] private bool destroyAfter;
-    private float lastTick;
+    private float lastTick = -1000;
     private readonly Dictionary<Hitbox, int> activeCollisions = new();
 
     public Action OnTriggered;
