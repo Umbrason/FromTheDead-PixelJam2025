@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -6,10 +8,34 @@ public class GameOverHandler : MonoBehaviour
 {
     [SerializeField] HealthPool PlayerHealthPool;
     [SerializeField] Light2D SceneLight;
-    void Awake()
+    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] WaveSpawner spawner;
+    [SerializeField] TMP_Text text;
+
+    [SerializeField] LeaderboardInputField nameInput;
+
+    async void Awake()
     {
         PlayerHealthPool.OnDepleted += () => StartCoroutine(GameOverAnimationRoutine());
+        spawner.OnWaveCompleted += ScoreIncrease;
+
+        nameInput.SetTextWithoutNotify(await Authentication.GetPlayerName());
+        nameInput.onSubmit.AddListener(async (name) =>
+        {
+            await Authentication.ChangePlayerName(name);
+        });
     }
+
+    int score = 0;
+    private void ScoreIncrease(int wave)
+    {
+        score = wave;
+        text.text = wave.ToString();
+    }
+
+    public void Restart() => SceneLoader.Load("Gameplay");
+    public void ToMenu() => SceneLoader.Load("MainMenu");
+
     IEnumerator GameOverAnimationRoutine()
     {
         var t = 0f;
@@ -29,6 +55,19 @@ public class GameOverHandler : MonoBehaviour
             Time.timeScale = 1 - t;
             yield return null;
         }
+        while (t > 0)
+        {
+            t -= Time.unscaledDeltaTime / .3f;
+            t = Mathf.Clamp01(t);
+            canvasGroup.alpha = 1 - t;
+            yield return null;
+        }
         yield return null;
+    }
+
+    async void OnDestroy()
+    {
+        Time.timeScale = 1f;
+        await LeaderboardManager.SetCurrentPlayerScore(score);
     }
 }
