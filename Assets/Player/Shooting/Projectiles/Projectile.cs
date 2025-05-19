@@ -48,7 +48,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int minFlightHeightInPixels = 6;
     [SerializeField] private int currentFlightHeightInPixels;
     [SerializeField] private int maxflightHeightInPixels = 10;
-    [field: SerializeField] protected virtual float maxFlightTime { get; } = 1f;
+    [field: SerializeField] protected virtual float MaxFlightTime { get; set;  } = 1f;
     private float currentFlightHeight => currentFlightHeightInPixels / 16f;
     [SerializeField] private float dropAnimationDuration = .25f;
     [SerializeField] GameObject DropImpactVFX;
@@ -125,7 +125,7 @@ public class Projectile : MonoBehaviour
         Collider.isTrigger = false;
     }
 
-    protected void Drop()
+    protected virtual void Drop()
     {
         if (CurrentState != State.Shooting) return;
         damageEvent = null;
@@ -141,15 +141,15 @@ public class Projectile : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         if (CurrentState != State.Shooting) return;
-        var t = FlightTime / maxFlightTime;
+        var t = FlightTime / MaxFlightTime;
         t = 1 - (t * 2 - 1) * (t * 2 - 1);
         currentFlightHeightInPixels = Mathf.RoundToInt(Mathf.Lerp(minFlightHeightInPixels, maxflightHeightInPixels, t));
         Visual.transform.localPosition = Vector3.forward * currentFlightHeight;
         VelocityController.AddOverwriteMovement(new(ModifiedDirection._x0y().normalized * ModifiedSpeed + SpeedAtLaunch._x0y()), 0f, 0);
-        if (FlightTime > maxFlightTime) Drop();
+        if (FlightTime > MaxFlightTime) Drop();
     }
 
-    private HealthEvent damageEvent;
+    protected HealthEvent damageEvent { get; set; }
     public virtual void Shoot(Vector2 direction, Vector2 speedAtLaunch)
     {
         if (CurrentState != State.Collected) return;

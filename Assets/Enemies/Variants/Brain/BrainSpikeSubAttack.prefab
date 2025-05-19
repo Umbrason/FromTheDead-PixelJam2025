@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4806657800804305394}
   - component: {fileID: 1207327514910247990}
   - component: {fileID: 4819203162134148844}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BrainSpikeSubAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2819124013442828023}
   - component: {fileID: 3910248300514890357}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

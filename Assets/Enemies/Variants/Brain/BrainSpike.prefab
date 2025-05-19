@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3899885720080316463}
   - component: {fileID: 9111513243704357879}
   - component: {fileID: 950819350256625948}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BrainSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

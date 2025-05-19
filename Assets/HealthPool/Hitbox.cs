@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    [field: SerializeField] public bool IsCritical { get; private set; }
+    [field: SerializeField] public bool IsCritical { get; set; }
     Cached<HealthPool> cached_HealthPool = new(Cached<HealthPool>.GetOption.Parent);
     HealthPool HealthPool => cached_HealthPool[this];
 

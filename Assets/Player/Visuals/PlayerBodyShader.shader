@@ -18,6 +18,10 @@ Shader "Unlit/PlayerBodyShader"
         _Flatness("Flatness", Float) = .15
         _blobSize("Blob Size", Float) = 1
         _k("Smoothing", Float) = .45
+
+        _velDistortion("Velocity Shape Distortion", Float) = .3
+        _maxVel("Max Velocity", Float) = 15
+
     }
     SubShader
     {
@@ -60,6 +64,9 @@ Shader "Unlit/PlayerBodyShader"
             float _SizeRandomness;
             float _Flatness;
             float _blobSize;
+
+            float _velDistortion;
+            float _maxVel;
 
 
             float _ShadingThreshold;
@@ -120,8 +127,10 @@ Shader "Unlit/PlayerBodyShader"
                     delta *= 1 + sin(_Time.y + rand(i + 784.42) * 6.828) * .15;
                     /* delta /= 1 + saturate(-delta.y) * .2; */
                     delta *= ((rand(i) - .5) * _SizeRandomness) + 1;
-
-                    if(velMag > .1) delta *= float2(1,1) + abs(velPerpendicular / velMag * saturate(velMag / 10.0) * .5) - abs(vel / velMag * saturate(velMag / 10.0) * .5);
+                    
+                    float deltaMag = length(delta);
+                    float2 deltaDir = delta / deltaMag;
+                    if(velMag > .1) delta = deltaDir * (deltaMag * (1 + saturate(abs(dot(deltaDir, velPerpendicular / _maxVel))) * _velDistortion - clamp(dot(deltaDir, -vel / _maxVel), -1, 1) * _velDistortion));
                     float sqrDist = dot(delta, delta);
                     float dist = sqrt(sqrDist);
                     sdf = (smin(sdf, dist, _k) * (i > 0)) + ((i == 0) * dist);

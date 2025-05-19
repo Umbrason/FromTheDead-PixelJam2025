@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 4849905862052389094}
   - component: {fileID: 6976401712646865723}
   - component: {fileID: 800592898151714889}
+  - component: {fileID: 4765924469984786789}
   m_Layer: 8
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -278,6 +279,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 483831841815524064, guid: b8e216b07bcedc3eca7c3257ff41a3cf, type: 3}
+--- !u!114 &4765924469984786789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627109600796310022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b8924cffbc3bf739da5948e8516ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7767945550727015606
 GameObject:
   m_ObjectHideFlags: 0

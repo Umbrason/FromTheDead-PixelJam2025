@@ -18,7 +18,7 @@ public class BrainEnemySpikeAttack : MonoBehaviour
         if (delta.sqrMagnitude <= minDistance * minDistance) return;
         lastPosition = selfPos;
         var contactDamage = Instantiate(AttackPrefab, transform.position, Quaternion.identity);
-        contactDamage.OnTriggered += () => Destroy(gameObject);
+        if (contactDamage) contactDamage.OnTriggered += () => { if (gameObject != null) Destroy(gameObject); };
     }
 
     void Awake() => noiseOffset = Random.insideUnitCircle * 1000;

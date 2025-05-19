@@ -7,6 +7,8 @@ public class SpawnPuddle : MonoBehaviour
     [SerializeField] float minDistance = 1f;
     [SerializeField] private AcidPuddleDespawnAfterTimeOrOwnerDeath PuddlePrefab;
 
+    void OnEnable() => lastPosition = transform.position._xz();
+
     void FixedUpdate()
     {
         var selfPos = transform.position._xz();

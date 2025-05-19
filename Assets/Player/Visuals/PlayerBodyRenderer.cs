@@ -75,7 +75,7 @@ public class PlayerBodyRenderer : MonoBehaviour
         for (int i = 0; i < velocityData.Length; i++)
         {
             velocityData[i] += Rigidbody.linearVelocity._xz();
-            velocityData[i] *= (Mathf.Sin(Time.time * 3.141f * 2f * 2f) + 1) / 2f;
+            velocityData[i] *= (1 + (Mathf.Sin(Time.time * 3.141f * 2f * 2f) + 1) / 2f) / 2f;
         }
         positionsTexture.SetPixelData(positionsData, 0, 0);
         velocityTexture.SetPixelData(velocityData, 0, 0);

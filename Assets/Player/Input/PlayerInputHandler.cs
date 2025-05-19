@@ -42,6 +42,11 @@ public class PlayerInputHandler : MonoBehaviour, PlayerInput.IGameplayActionsAct
         input.GameplayActions.Enable();
     }
 
+    void OnDestroy()
+    {
+        input.Dispose();
+    }
+
     public void OnAimAbsolute(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         Shooting.CurrentAimMode = PlayerShooting.AimMode.AbsoluteTarget;

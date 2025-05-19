@@ -13,6 +13,7 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!Target) return;
         lastPosition = currentPosition;
         currentPosition = Target.position._xz();
     }
@@ -20,6 +21,7 @@ public class CameraFollow : MonoBehaviour
     void Awake()
     {
         PositionSpring = new(config);
+        PositionSpring.RestingPos = PositionSpring.Position = transform.position._xz();
     }
 
 

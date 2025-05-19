@@ -10,6 +10,8 @@ public class BrainEnemyBrain : BaseEnemyBrain
     [SerializeField] private float speed = 6f;
     [SerializeField] private float attackRadius = 5f;
     [SerializeField] private float spawnBurstCooldown = 6f;
+    Cached<Hitbox> cached_hitbox;
+    Hitbox Hitbox => cached_hitbox[this];
 
     protected override IEnumerator FirstThought()
     {
@@ -36,6 +38,7 @@ public class BrainEnemyBrain : BaseEnemyBrain
         bool interrupted = false;
         void Interrupt(int damageTaken) => interrupted |= -damageTaken > 0;
         HealthPool.OnModified += Interrupt;
+        Hitbox.IsCritical = true;
         this.Animator.Current = ChargeAnimation;
         while (this.Animator.LoopCount < 1)
         {
@@ -44,6 +47,7 @@ public class BrainEnemyBrain : BaseEnemyBrain
             yield return new WaitForFixedUpdate();
         }
         HealthPool.OnModified -= Interrupt;
+        Hitbox.IsCritical = false;
         if (interrupted) yield break;
         this.Animator.Current = SpawnAnimation;
         /* var spawnPosition = EnemyBrainUtils.RandomPatrolPosition(EnemyBrainUtils.PlayerPosition(), 1, 1); */

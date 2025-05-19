@@ -4,12 +4,12 @@ public class DestroyOnDeath : MonoBehaviour
 {
     Cached<HealthPool> cached_HealthPool;
     HealthPool HealthPool => cached_HealthPool[this];
-    private void OnEnable()
+    private void Start()
     {
         if (HealthPool) HealthPool.OnDepleted += DestoyOnDeath;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         if (HealthPool) HealthPool.OnDepleted -= DestoyOnDeath;
     }
