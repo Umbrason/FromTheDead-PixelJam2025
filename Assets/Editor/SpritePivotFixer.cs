@@ -21,9 +21,12 @@ public class SpritePivotFixer : AssetPostprocessor
         var spriteRects = dataProvider.GetSpriteRects();
         foreach (var rect in spriteRects)
         {
-            var roundedPivot = (Vector2Int.FloorToInt(rect.rect.size * pivot) + Vector2.one / 2f) / rect.rect.size;
-            rect.pivot = roundedPivot;
-            rect.alignment = SpriteAlignment.Custom;
+            if (rect.alignment == SpriteAlignment.Center)
+            {
+                var roundedPivot = (Vector2Int.FloorToInt(rect.rect.size * pivot) + Vector2.one / 2f) / rect.rect.size;
+                rect.pivot = roundedPivot;
+                rect.alignment = SpriteAlignment.Custom;
+            }
         }
         dataProvider.SetSpriteRects(spriteRects);
     }

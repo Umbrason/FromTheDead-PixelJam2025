@@ -32,9 +32,12 @@ public class GameOverHandler : MonoBehaviour
         score = wave;
         text.text = wave.ToString();
     }
-
-    public void Restart() => SceneLoader.Load("Gameplay");
-    public void ToMenu() => SceneLoader.Load("MainMenu");
+    bool UnlockButtons = false;
+    public void Restart()
+    {
+        if (UnlockButtons) SceneLoader.Load("Gameplay");
+    }
+    public void ToMenu() { if (UnlockButtons) SceneLoader.Load("MainMenu"); }
 
     IEnumerator GameOverAnimationRoutine()
     {
@@ -63,6 +66,7 @@ public class GameOverHandler : MonoBehaviour
             yield return null;
         }
         yield return null;
+        UnlockButtons = true;
     }
 
     async void OnDestroy()

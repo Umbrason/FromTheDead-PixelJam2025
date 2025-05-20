@@ -26,6 +26,7 @@ public class WaveSpawner : MonoBehaviour
             yield return Spawn(Mathf.RoundToInt(EnemyCountCurve.Evaluate(Mathf.Clamp01(waveCounter / 100f))));
             yield return new WaitUntil(() => EnemyPositionMarker.EnemyCount == 0);
             OnWaveCompleted?.Invoke(waveCounter);
+            waveCounter++;
         }
     }
 
