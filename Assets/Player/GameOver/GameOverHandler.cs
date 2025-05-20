@@ -20,12 +20,7 @@ public class GameOverHandler : MonoBehaviour
     {
         PlayerHealthPool.OnDepleted += () => StartCoroutine(GameOverAnimationRoutine());
         spawner.OnWaveCompleted += ScoreIncrease;
-
         nameInput.SetTextWithoutNotify(await Authentication.GetPlayerName());
-        nameInput.onSubmit.AddListener(async (name) =>
-        {
-            await Authentication.ChangePlayerName(name);
-        });
     }
 
     int score = 0;
@@ -70,6 +65,11 @@ public class GameOverHandler : MonoBehaviour
         }
         yield return null;
         UnlockButtons = true;
+        nameInput.enabled = true;
+        nameInput.onSubmit.AddListener(async (name) =>
+        {
+            await Authentication.ChangePlayerName(name);
+        });
         GameOverScreenPlayer.gameObject.SetActive(true);
     }
 

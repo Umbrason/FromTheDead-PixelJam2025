@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91df5b22718d3951a9f8bc1398a7d94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Size>k__BackingField: 10
-  m_Current: 10
+  <Size>k__BackingField: 5
+  m_Current: 5
 --- !u!114 &3880167014597401789
 MonoBehaviour:
   m_ObjectHideFlags: 0

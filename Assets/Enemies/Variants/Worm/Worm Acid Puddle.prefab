@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e9c6b0b82922c19799cf134d4aa9ea3c, type: 2}
-  interactionRange: 1
+  interactionRange: 0.75
 --- !u!135 &4388155708930822570
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!199 &1555621010811219899
 ParticleSystemRenderer:
