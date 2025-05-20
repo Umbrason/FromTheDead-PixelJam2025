@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Services.Authentication;
-using Unity.Services.Leaderboards;
 using UnityEngine;
 
 public class ScoreboardUI : MonoBehaviour

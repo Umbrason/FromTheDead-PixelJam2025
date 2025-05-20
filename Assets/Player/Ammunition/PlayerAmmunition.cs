@@ -12,6 +12,8 @@ public class PlayerAmmunition : MonoBehaviour
     public Action<Projectile> OnProjectileRemoved;
     public Action OnShootingQueueChanged;
 
+    [SerializeField] AudioClipPlayer PickupSFX;
+
     public Projectile RemoveProjectile(Projectile p)
     {
         var idx = m_Projectiles.IndexOf(p);
@@ -49,7 +51,6 @@ public class PlayerAmmunition : MonoBehaviour
         if (HealthPool) HealthPool.OnModifiedWithSource -= HealthChanged;
     }
 
-
     void OnCollisionEnter(Collision other)
     {
         var projectile = other.collider.GetComponent<Projectile>();
@@ -76,6 +77,7 @@ public class PlayerAmmunition : MonoBehaviour
         projectile.OnCollect(this);
         HealthPool.Current = m_Projectiles.Count + 1;
         OnProjectileAdded?.Invoke(projectile);
+        PickupSFX.Play();
     }
 
     private List<Vector2> appendageVelocities = new();

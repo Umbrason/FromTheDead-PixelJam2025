@@ -25,12 +25,13 @@ public class PlayerShooting : Ability
 
     public override bool CanUse => LaunchDirection.sqrMagnitude > .01f && PlayerAmmunition.Next != null;
     public override float CooldownDuration => .5f;
-
+    [SerializeField] AudioClipPlayer ShootSFX;
     public override void OnPress()
     {
         var projectile = PlayerAmmunition.RemoveProjectile(PlayerAmmunition.Next);
         projectile.transform.position = transform.position;
         projectile.Shoot(LaunchDirection.normalized, Rigidbody.linearVelocity._xz());
+        ShootSFX.Play();
         CompleteUse();
     }
 

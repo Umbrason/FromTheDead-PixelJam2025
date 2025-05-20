@@ -8,6 +8,7 @@ public class BigFlyBrain : BaseEnemyBrain
     [SerializeField] private TinyFlyBrain tinyFlyTemplate;
     [SerializeField] private ScriptableSpriteAnimation MoveAnimation;
     [SerializeField] private ScriptableSpriteAnimation SpawnAnimation;
+    [SerializeField] private AudioClipPlayer Spawn;
     [SerializeField] private float speed = 7f;
     [SerializeField] private float spawnBurstCooldown = 4f;
     [SerializeField] private int spawnBurstSize = 3;
@@ -49,6 +50,7 @@ public class BigFlyBrain : BaseEnemyBrain
                 {
                     this.Animator.Current = SpawnAnimation;
                     yield return new WaitUntil(() => this.Animator.LoopCount >= 1);
+                    Spawn.Play();
                     var spawnAngle = (i + Random.value) / fliesToSpawn * Mathf.PI * 2;
                     var spawnDirection = new Vector2(Mathf.Sin(spawnAngle), Mathf.Cos(spawnAngle));
                     var newFly = Instantiate(tinyFlyTemplate, transform.position + spawnDirection._x0y() * .25f, Quaternion.identity);

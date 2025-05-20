@@ -7,6 +7,7 @@ public class BrainEnemyBrain : BaseEnemyBrain
     [SerializeField] private ScriptableSpriteAnimation MoveAnimation;
     [SerializeField] private ScriptableSpriteAnimation ChargeAnimation;
     [SerializeField] private ScriptableSpriteAnimation SpawnAnimation;
+    [SerializeField] private AudioClipPlayer Stmop;
     [SerializeField] private float speed = 6f;
     [SerializeField] private float attackRadius = 5f;
     [SerializeField] private float spawnBurstCooldown = 6f;
@@ -49,6 +50,7 @@ public class BrainEnemyBrain : BaseEnemyBrain
         HealthPool.OnModified -= Interrupt;
         Hitbox.IsCritical = false;
         if (interrupted) yield break;
+        Stmop.Play();
         this.Animator.Current = SpawnAnimation;
         /* var spawnPosition = EnemyBrainUtils.RandomPatrolPosition(EnemyBrainUtils.PlayerPosition(), 1, 1); */
         var instance = Instantiate(spikeAttack, transform.position, Quaternion.identity);

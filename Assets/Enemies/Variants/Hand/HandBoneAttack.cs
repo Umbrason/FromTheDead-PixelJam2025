@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class HandBoneAttack : MonoBehaviour
 {
-
     [SerializeField] SpriteRenderer Shadow;
     [SerializeField] SpriteRenderer Bone;
     [SerializeField] SpriteRenderer BoneMark;

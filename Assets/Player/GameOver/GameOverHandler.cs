@@ -11,6 +11,8 @@ public class GameOverHandler : MonoBehaviour
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] WaveSpawner spawner;
     [SerializeField] TMP_Text text;
+    [SerializeField] MusicPlayer musicPlayer;
+    [SerializeField] AudioClipPlayer GameOverScreenPlayer;
 
     [SerializeField] LeaderboardInputField nameInput;
 
@@ -44,6 +46,7 @@ public class GameOverHandler : MonoBehaviour
         var t = 0f;
         SceneLight.transform.position = PlayerHealthPool.transform.position;
         var startInnerRadius = SceneLight.pointLightInnerRadius;
+        musicPlayer.FadeOut();
         while (t < 1)
         {
             t += Time.unscaledDeltaTime / 2f;
@@ -67,6 +70,7 @@ public class GameOverHandler : MonoBehaviour
         }
         yield return null;
         UnlockButtons = true;
+        GameOverScreenPlayer.gameObject.SetActive(true);
     }
 
     async void OnDestroy()

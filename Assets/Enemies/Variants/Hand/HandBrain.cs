@@ -10,6 +10,7 @@ public class HandBrain : BaseEnemyBrain
     [SerializeField] private float attackRadius = 5f;
     [SerializeField] private float spawnBurstCooldown = 6f;
     [SerializeField] private int spawnBurstSize = 3;
+    [SerializeField] AudioClipPlayer launchSFX;
 
     protected override IEnumerator FirstThought()
     {
@@ -36,6 +37,7 @@ public class HandBrain : BaseEnemyBrain
         for (int i = 0; i < spawnBurstSize; i++)
         {
             this.Animator.Current = SpawnAnimation;
+            launchSFX.Play();
             while (this.Animator.LoopCount < 1)
             {
                 VelocityController.AddOverwriteMovement(new(Vector2.zero), 0, 0);
