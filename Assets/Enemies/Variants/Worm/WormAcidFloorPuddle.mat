@@ -44,7 +44,7 @@ Material:
     - _Blink_Frequency: 1
     - _ChannelCount: 1
     - _EdgeThickness: 0.22
-    - _Interactors: 0
+    - _Interactors: 43
     - _Noise_Frequency: 0.88
     - _Noise_Strength: 0.2
     m_Colors:

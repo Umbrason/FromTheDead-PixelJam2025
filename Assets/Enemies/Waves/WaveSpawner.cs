@@ -25,8 +25,8 @@ public class WaveSpawner : MonoBehaviour
             OnWaveStarted?.Invoke(waveCounter);
             yield return Spawn(Mathf.RoundToInt(EnemyCountCurve.Evaluate(Mathf.Clamp01(waveCounter / 100f))));
             yield return new WaitUntil(() => EnemyPositionMarker.EnemyCount == 0);
-            OnWaveCompleted?.Invoke(waveCounter);
             waveCounter++;
+            OnWaveCompleted?.Invoke(waveCounter);
         }
     }
 
@@ -38,6 +38,7 @@ public class WaveSpawner : MonoBehaviour
             var pos = EnemyBrainUtils.RandomPatrolPosition(default, 0, 50);
             var instance = Instantiate(SpawnCircle, pos._x0y(), Quaternion.identity);
             SpawnCircles.Add(instance);
+            yield return new WaitForSeconds(.1f);
         }
         yield return new WaitUntil(() => SpawnCircles.All(circle => circle == null));
     }

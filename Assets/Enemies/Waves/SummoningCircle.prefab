@@ -111,6 +111,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2156812494253321442}
   - component: {fileID: 8104977793568309392}
+  - component: {fileID: 7239505994623760404}
   m_Layer: 0
   m_Name: SummoningCircle
   m_TagString: Untagged
@@ -152,3 +153,16 @@ MonoBehaviour:
   - {fileID: 1675661448804191083, guid: 1d90476add78eb585b413d83f1abcb09, type: 3}
   - {fileID: 5824661155765908943, guid: 599ab0fb291f7a17eb5547a6f1e7cef7, type: 3}
   Delay: 3
+--- !u!114 &7239505994623760404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500636966517044614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4955b25d64bcd5387c2c11eb5d1c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 7803663620096164687, guid: 7eb1fb4671acfa0469f49792c0c4b44a, type: 3}

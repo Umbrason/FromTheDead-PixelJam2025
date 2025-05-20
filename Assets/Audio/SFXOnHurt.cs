@@ -17,6 +17,7 @@ public class SFXOnHurt : MonoBehaviour
 
     private void Play(int arg1, HealthEvent @event)
     {
+        if (@event == null) return;
         if (arg1 < 0) Instantiate(AudioClipPlayer, transform.position, Quaternion.identity);
     }
 }

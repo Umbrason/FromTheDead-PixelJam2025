@@ -6,6 +6,8 @@ public class AcidPuddleContactDamage : MonoBehaviour
     static float Tickrate = 2f;
     [SerializeField] private int DamageAmount;
 
+    [SerializeField] private AudioClipPlayer SFX;
+
 
     void OnTriggerEnter(Collider c) => OnTriggerStay(c);
     void OnTriggerStay(Collider c)
@@ -13,6 +15,7 @@ public class AcidPuddleContactDamage : MonoBehaviour
         var hitbox = c.GetComponentInParent<Hitbox>();
         if (!hitbox) return;
         if (Time.time < lastDamageEventTime + 1f / Tickrate) return;
+        SFX.Play();
         lastDamageEventTime = Time.time;
         hitbox.RegisterDamageEvent(HealthEvent.Damage((uint)DamageAmount, false, gameObject));
     }
