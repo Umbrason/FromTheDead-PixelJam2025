@@ -9,7 +9,9 @@ Shader "Hitflash/Blit"
     {
         Tags { "RenderType"="Transparent" }
         LOD 100
-        ZTest LEqual
+        ZTest Always
+        ZWrite Off
+        Cull Off
         Blend SrcAlpha OneMinusSrcAlpha
 
         Pass

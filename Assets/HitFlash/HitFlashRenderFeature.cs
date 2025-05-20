@@ -141,6 +141,7 @@ public class HitFlashRenderFeature : ScriptableRendererFeature
 
             hitFlashMaskTextureDescriptor.width = cameraData.cameraTargetDescriptor.width;
             hitFlashMaskTextureDescriptor.height = cameraData.cameraTargetDescriptor.height;
+            hitFlashMaskTextureDescriptor.graphicsFormat = UnityEngine.Experimental.Rendering.GraphicsFormat.R8G8B8A8_UNorm;
             hitFlashMaskTextureDescriptor.depthBufferBits = 0;
 
             var srcCamColorHandle = resourceData.activeColorTexture;

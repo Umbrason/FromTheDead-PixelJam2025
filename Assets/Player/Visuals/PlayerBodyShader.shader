@@ -33,7 +33,6 @@ Shader "Unlit/PlayerBodyShader"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma target 5.0
             #include "UnityCG.cginc"
             #include "Assets/ShaderLib/Simplex4D.hlsl"
 
@@ -127,7 +126,7 @@ Shader "Unlit/PlayerBodyShader"
                     delta *= 1 + sin(_Time.y + rand(i + 784.42) * 6.828) * .15;
                     /* delta /= 1 + saturate(-delta.y) * .2; */
                     delta *= ((rand(i) - .5) * _SizeRandomness) + 1;
-                    
+
                     float deltaMag = length(delta);
                     float2 deltaDir = delta / deltaMag;
                     if(velMag > .1) delta = deltaDir * (deltaMag * (1 + saturate(abs(dot(deltaDir, velPerpendicular / _maxVel))) * _velDistortion - clamp(dot(deltaDir, -vel / _maxVel), -1, 1) * _velDistortion));
