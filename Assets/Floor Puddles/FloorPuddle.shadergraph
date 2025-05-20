@@ -4090,7 +4090,7 @@
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 0,
     "m_ZTestMode": 4,
-    "m_ZWriteControl": 0,
+    "m_ZWriteControl": 1,
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
@@ -8299,8 +8299,8 @@
     "m_ObjectId": "f12233f4d50b444dba43ee978cd0bc54",
     "m_Title": "Pixel Rounded Position",
     "m_Position": {
-        "x": -2641.999755859375,
-        "y": 95.99996185302735
+        "x": -2642.000244140625,
+        "y": 96.0
     }
 }
 
