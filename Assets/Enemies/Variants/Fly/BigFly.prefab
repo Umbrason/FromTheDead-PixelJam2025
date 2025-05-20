@@ -278,8 +278,8 @@ MonoBehaviour:
   Spawn: {fileID: 699362216208471761}
   speed: 7
   spawnBurstCooldown: 8
-  spawnBurstSize: 3
-  maxOffspringCount: 5
+  spawnBurstSize: 2
+  maxOffspringCount: 3
 --- !u!135 &890617235446114728
 SphereCollider:
   m_ObjectHideFlags: 0
