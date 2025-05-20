@@ -63,6 +63,8 @@ public class GameOverHandler : MonoBehaviour
             canvasGroup.alpha = 1 - t;
             yield return null;
         }
+        var task = LeaderboardManager.SetCurrentPlayerScore(score);
+        yield return new WaitUntil(() => task.IsCompleted);
         yield return null;
         UnlockButtons = true;
         nameInput.enabled = true;
@@ -73,9 +75,8 @@ public class GameOverHandler : MonoBehaviour
         GameOverScreenPlayer.gameObject.SetActive(true);
     }
 
-    async void OnDestroy()
+    void OnDestroy()
     {
         Time.timeScale = 1f;
-        await LeaderboardManager.SetCurrentPlayerScore(score);
     }
 }
